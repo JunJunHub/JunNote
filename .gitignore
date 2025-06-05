@@ -10,7 +10,8 @@
 /.vscode
 
 
-# 暂不同步的目录
+# 暂不同步的目录暂不同步的目录
+.obsidian
 00-PersonalInfo
 01-work
 02-CodeComponents

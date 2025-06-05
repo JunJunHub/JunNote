@@ -81,7 +81,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 214.5
+    "width": 248.5
   },
   "right": {
     "id": "efd2c69f19ce5c9d",
@@ -169,7 +169,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 532.5
+    "width": 361.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -184,8 +184,8 @@
   },
   "active": "e727a02ec2cf9d5d",
   "lastOpenFiles": [
-    "resource/双栈.md",
     "01-Work/2-kedacom/工作随笔.md",
+    "resource/双栈.md",
     "06-Classification/00-我的总结/Mysql 双机冗余.md",
     "06-Classification/00-我的总结/SQLite3.md",
     "06-Classification/00-我的总结/SocketProgramming.pdf",
