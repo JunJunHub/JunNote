@@ -1,3 +1,11 @@
+---
+datetime: 
+aliases:
+  - FFmpeg 基本使用
+tags:
+  - FFmpeg
+---
+
 ## ffmpeg
 
 [开源视频编辑软件 | Linux 中国 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/647932724)

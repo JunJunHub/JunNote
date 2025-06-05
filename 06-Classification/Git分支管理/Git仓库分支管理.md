@@ -1,3 +1,13 @@
+---
+datetime: 2025-06-05T17:05:00
+aliases:
+  - 常见 Git 仓库分支管理策略总结
+  - MPU 业务代码管理规范
+tags:
+  - Git
+  - MPU
+---
+
 # Git 仓库分支管理
 
 **目录**
@@ -736,7 +746,7 @@ git push origin --delete hotfix/V2R1B4_1.0.0_XXX
 
 
 
-## 三、Git 基础
+## 三、Git 基础命令
 
 ### Git 安装配置
 
@@ -749,8 +759,6 @@ git push origin --delete hotfix/V2R1B4_1.0.0_XXX
 
 ```shell
 ```
-
-
 
 ### Git 仓库
 

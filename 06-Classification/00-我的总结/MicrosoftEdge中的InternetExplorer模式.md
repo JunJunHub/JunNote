@@ -1,3 +1,11 @@
+---
+datetime: 
+aliases:
+  - MicrosoftEdge 加载 InternetExplorer
+tags:
+  - MicrosoftEdge
+---
+
 # Microsoft Edge 中的 Internet Explorer 模式
 
 有些网站专为与 Internet Explorer 一起使用，它们具有 Microsoft Edge 等新式浏览器不支持的功能。 如果你需要查看其中的某个网站，可使用 Microsoft Edge 中的 Internet Explorer 模式。 

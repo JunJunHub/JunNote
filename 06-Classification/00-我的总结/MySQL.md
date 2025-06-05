@@ -1,3 +1,12 @@
+---
+datetime: 
+aliases:
+  - Mysql 数据库配置
+tags:
+  - MYSQL
+  - DB
+---
+
 # 概念：
 
 `SQL` 是用于访问和处理数据库的标准的计算机语言。全称为`Structured Query Language`，即结构化查询语言。

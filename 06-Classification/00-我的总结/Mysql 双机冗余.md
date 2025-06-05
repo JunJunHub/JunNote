@@ -1,3 +1,12 @@
+---
+datetime: 
+aliases: 
+tags:
+  - MPU
+  - MYSQL
+  - MYSQL/Slave
+---
+
 <img src="./resource_images/kedacom_logo.png" alt="kedacom" style="zoom:100%;margin-right:auto; margin-left:0; display:block;" />
 
 ***

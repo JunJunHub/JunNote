@@ -1,3 +1,11 @@
+---
+datetime: 2025-06-05T17:25:00
+aliases:
+  - Docker 基本原理；Docker 常用命令；
+tags:
+  - Docker
+---
+
  <img src="./kedacom_logo.png" alt="kedacom" style="text-align:left;zoom:100%;" />
 
 
@@ -172,9 +180,9 @@ Docker 容器通过 Docker 镜像来创建。
 容器与镜像的关系类似于面向对象编程中的对象与类。
 
 | Docker | 面向对象 |
-| :----- | :------- |
-| 容器   | 对象     |
-| 镜像   | 类       |
+| :----- | :--- |
+| 容器     | 对象   |
+| 镜像     | 类    |
 
 ![img](https://www.runoob.com/wp-content/uploads/2016/04/576507-docker1.png)
 

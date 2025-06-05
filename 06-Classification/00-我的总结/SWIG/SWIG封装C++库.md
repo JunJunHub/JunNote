@@ -1,3 +1,13 @@
+---
+datetime: 2025-06-05T17:35:00
+aliases:
+  - SWIG 开源工具
+tags:
+  - Go
+  - SWIG
+  - MPU
+---
+
 <br>
 <img src="./resource_images/kedacom_logo.png" alt="kedacom" style="zoom:100%;margin-right:auto; margin-left:0; display:block;" />
 

@@ -1,3 +1,10 @@
+---
+datetime: 
+aliases: 
+tags:
+  - AI
+---
+
 ##  Chat-GPT 提问小技巧
 
 

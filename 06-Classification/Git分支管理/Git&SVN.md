@@ -1,4 +1,14 @@
-# Git And SVN
+---
+datetime: 2025-06-05T17:07:00
+aliases:
+  - Git SVN 仓库同步
+  - Git SVN 常用命令
+tags:
+  - Git
+  - SVN
+---
+
+# Git & SVN
 
 **目录**
 
@@ -62,11 +72,10 @@ Git 最核心的一个概念就是**工作流**。
 
 若服务器使用的 SVN，但是本地想要体验 Git 的本地分支，离线操作等功能，可以使用 Git-SVN 功能。
 
-常用操作如下（图片来源于网络）：
-
+常用操作如下：
 ![91af937b0150500afadf690451c8160f.png](https://i-blog.csdnimg.cn/blog_migrate/0d7768b4f1cbf074c9a6e74666cd6f53.png)
 
-```go
+```shell
 # 下载一个 SVN 项目和它的整个代码历史，并初始化为 Git 代码库
 $ git svn clone -s [repository]
 
@@ -89,7 +98,8 @@ $ svn copy [remote_branch] [new_remote_branch] -m [message]
 $ git checkout -b [local_branch] [remote_branch]
 ```
 
-### [初始化]()
+## Git 常用命令
+### 初始化
 
 > 从本节开始，除特殊说明，以下命令均适用于 Git 与 Git-SVN。
 

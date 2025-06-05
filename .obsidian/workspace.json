@@ -23,24 +23,8 @@
               "icon": "lucide-file",
               "title": "工作随笔"
             }
-          },
-          {
-            "id": "daa8736cdc61aa4a",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "01-Work/2-kedacom/MPU/显控问题排查总结/显控业务问题排查经验.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": false
-              },
-              "icon": "lucide-file",
-              "title": "显控业务问题排查经验"
-            }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -97,7 +81,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 277.5
+    "width": 443.5
   },
   "right": {
     "id": "efd2c69f19ce5c9d",
@@ -146,7 +130,7 @@
             "state": {
               "type": "tag",
               "state": {
-                "sortOrder": "frequency",
+                "sortOrder": "alphabetical",
                 "useHierarchy": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -161,21 +145,21 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "01-Work/2-kedacom/MPU/显控问题排查总结/显控业务问题排查经验.md",
+                "file": "01-Work/2-kedacom/工作随笔.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "显控业务问题排查经验 的大纲"
+              "title": "工作随笔 的大纲"
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
-    "width": 408.5
+    "width": 465.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -187,53 +171,53 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "daa8736cdc61aa4a",
+  "active": "e727a02ec2cf9d5d",
   "lastOpenFiles": [
     "01-Work/2-kedacom/工作随笔.md",
-    "01-Work/2-kedacom/MPU/显控问题排查总结/显控业务问题排查经验.md",
-    "06-Classification/01-通用轮子(个人整理)/PCSP/70-protocol/libwebsockets/READMEs/README.generic-sessions.md",
-    "06-Classification/01-通用轮子(个人整理)/PCSP/70-protocol/libwebsockets/minimal-examples/README.md",
-    "06-Classification/01-通用轮子(个人整理)/PCSP/70-protocol/libwebsockets/READMEs/README.coding.md",
-    "06-Classification/01-通用轮子(个人整理)/PCSP/70-protocol/curl/curl_7.77.0/curl-curl-735c6af/docs/CONTRIBUTE.md",
-    "06-Classification/01-通用轮子(个人整理)/PCSP/70-protocol/librdkafka/README.md",
-    "06-Classification/00-我的总结/04-数据库/显控Mysql数据库配置更新记录.md",
+    "06-Classification/00-我的总结/Mysql 双机冗余.md",
+    "06-Classification/00-我的总结/SQLite3.md",
+    "06-Classification/00-我的总结/SocketProgramming.pdf",
+    "06-Classification/00-我的总结/NAT穿透技术原理及企业级实践.md",
+    "06-Classification/00-我的总结/MySQL.md",
+    "06-Classification/00-我的总结/MQTT协议.md",
+    "06-Classification/00-我的总结/MicrosoftEdge中的InternetExplorer模式.md",
+    "06-Classification/00-我的总结/Markdown 写作技巧.md",
+    "06-Classification/00-我的总结/Linux常用调试方法记录.md",
+    "06-Classification/00-我的总结/ffmpeg.md",
+    "06-Classification/00-我的总结/Chat-GPT提问小技巧.md",
+    "06-Classification/00-我的总结/数据库分类.md",
+    "06-Classification/00-我的总结/软件设计图例.md",
+    "06-Classification/00-我的总结/达梦数据库使用.pdf",
+    "06-Classification/00-我的总结/达梦数据库.md",
+    "06-Classification/00-我的总结/SWIG/SWIG封装C++库.md",
+    "06-Classification/00-我的总结/resource_images/test.mp4",
+    "06-Classification/00-我的总结/IPv6兼容/显控协议IPv6兼容问题.md",
+    "resource/双栈.md",
+    "resource",
+    "06-Classification/00-我的总结/Golang/gocn-GoFrame框架介绍及设计.pdf",
+    "06-Classification/00-我的总结/Docker/显控组Linux编译机环境使用流程.md",
+    "06-Classification/00-我的总结/Docker/显控组Linux编译机环境使用流程.pdf",
     "06-Classification/00-我的总结/Docker/Docker笔记.md",
-    "06-Classification/01-通用轮子(个人整理)/PCSP/70-protocol/curl/curl_7.77.0/curl-curl-735c6af/docs/CODE_STYLE.md",
-    "06-Classification/01-通用轮子(个人整理)/NVR/41-service_nvr/py_tools/AutoCreatecJSON/file/Readme.md",
-    "06-Classification/01-通用轮子(个人整理)/NVR/41-service_nvr/py_tools/py_IPCAnalogTool/doc/readme.md",
-    "06-Classification/01-通用轮子(个人整理)/py_tools/py_IPCAnalogTool/doc/readme.md",
-    "01-Work/2-kedacom/MPU/MSP/MARK/多哥国际化业务相关修改.md",
-    "06-Classification/01-通用轮子(个人整理)/py_tools/AutoCreatecJSON/file/Readme.md",
-    "01-Work/2-KEDA~1/MPU/MSP/01-分布式显控/00-RKDocs/RKMPI_Release/example/rk_mpi_uvc/uac/src/mpi_common/mpi_control_common.cpp",
-    "01-Work/2-KEDA~1/MPU/MSP/01-分布式显控/00-RKDocs/RKMPI_Release/example/rk_mpi_uvc/uac/src/mpi_common/uac_amixer.cpp",
-    "01-Work/2-KEDA~1/MPU/MSP/01-分布式显控/00-RKDocs/RKMPI_Release/example/rk_mpi_uvc/uac/src/mpi/uac_control_mpi.cpp",
-    "01-Work/2-KEDA~1/MPU/MSP/01-分布式显控/00-RKDocs/RKMPI_Release/example/rk_mpi_uvc/uac/src/include/uac_uevent.h",
-    "01-Work/2-KEDA~1/MPU/MSP/01-分布式显控/00-RKDocs/RKMPI_Release/example/rk_mpi_uvc/uac/src/include/uac_log.h",
-    "01-Work/2-KEDA~1/MPU/MSP/01-分布式显控/00-RKDocs/RKMPI_Release/example/rk_mpi_uvc/uac/src/include/uac_control_mpi.h",
-    "01-Work/2-KEDA~1/MPU/MSP/01-分布式显控/00-RKDocs/RKMPI_Release/example/rk_mpi_uvc/uac/src/include/uac_control_graph.h",
-    "01-Work/2-KEDA~1/MPU/MSP/01-分布式显控/00-RKDocs/RKMPI_Release/example/rk_mpi_uvc/uac/src/include/uac_control_factory.h",
-    "01-Work/2-KEDA~1/MPU/MSP/01-分布式显控/00-RKDocs/RKMPI_Release/example/rk_mpi_uvc/uac/src/include/uac_control.h",
-    "01-Work/2-KEDA~1/MPU/MSP/01-分布式显控/00-RKDocs/RKMPI_Release/example/rk_mpi_uvc/uac/src/include/uac_amixer.h",
-    "01-Work/2-KEDA~1/MPU/MPC/解码管理微服务/解码管理服务/refrence/开启解码任务时序图.svg",
-    "01-Work/2-KEDA~1/MPU/MPC/解码管理微服务/解码管理服务/picture/结构.PNG",
-    "01-Work/2-KEDA~1/MPU/MPC/解码管理微服务/解码管理服务/picture/image-20210804090642351.png",
-    "01-Work/2-KEDA~1/MPU/MPC/解码管理微服务/解码管理服务/picture/relation.PNG",
-    "01-Work/2-KEDA~1/MPU/MPC/解码管理微服务/解码管理服务/picture/image-20210804090717054.png",
-    "01-Work/2-KEDA~1/MPU/MPC/解码管理微服务/解码管理服务/picture/image-20210804090845786.png",
-    "01-Work/2-KEDA~1/MPU/MPC/解码管理微服务/解码管理服务/picture/image-20210804091003118.png",
-    "01-Work/2-KEDA~1/MPU/MSP/01-分布式显控/分布式设计案例/res/vsync_adjust_param.png",
-    "01-Work/2-KEDA~1/MPU/MSP/01-分布式显控/分布式设计案例/res/vo_enable_vsync.png",
-    "01-Work/2-KEDA~1/MPU/MSP/01-分布式显控/分布式设计案例/res/ptp_capture.png",
-    "01-Work/2-KEDA~1/MPU/MSP/01-分布式显控/03-分布式设计文档/坐席/01_readme.md",
-    "01-Work/2-KEDA~1/MPU/MSP/显控支持HTTPS/SSLTool/readme.md",
-    "01-Work/2-KEDA~1/MPU/MPC/解码管理微服务/解码管理服务/解码管理服务分享.md",
-    "01-Work/2-KEDA~1/MPU/MSP/01-分布式显控/分布式设计案例/分布式拼接开窗方案.md",
-    "01-Work/2-KEDA~1/MPU/MSP/KVM/DSTB_XY/01_readme.md",
-    "01-Work/2-KEDA~1/MPU/MSP/01-分布式显控/04-分布式调试文档/分布式欧拉主控PTP服务配置.md",
-    "01-Work/2-KEDA~1/MPU/显控调试工具/kmedia-uni-1.22.0/README.md",
-    "01-Work/2-KEDA~1/MPU/MSP/显控支持HTTPS/显控支持Https配置.md",
-    "01-Work/2-KEDA~1/MPU/MSP/显控支持HTTPS/openssl生成签发证书流程.md",
-    "01-Work/2-KEDA~1/MPU/MSP/国产化/国产化MPU板移植.md",
-    "01-Work/2-KEDA~1/MPU/MSP/MARK/多哥国际化业务相关修改.md"
+    "06-Classification/00-我的总结/Docker/Docker笔记.pdf",
+    "06-Classification/00-我的总结/Docker/kedacom_logo.png",
+    "06-Classification/00-我的总结/04-数据库/mysql_innodb_binlog.png",
+    "06-Classification/00-我的总结/04-数据库/显控Mysql数据库配置更新记录.md",
+    "Notebook/Snmp网管协议.md",
+    "06-Classification/00-我的总结/00-Linux调试/Linux丢包问题排查.md",
+    "01-Work/2-kedacom/MPU/显控问题排查总结/显控业务问题排查经验.md",
+    "01-Work/2-kedacom/MPU/MSP/01-分布式显控/分布式输出同步联调记录.md",
+    "06-Classification/00-我的总结/00-Linux调试/堆栈溢出、越界访问排查技能-王胜柯.pdf",
+    "06-Classification/Git分支管理/Git仓库分支管理.md",
+    "06-Classification/Git分支管理/Git&SVN.md",
+    "06-Classification/Git分支管理/image/GitAndSVN.png",
+    "06-Classification/Git分支管理/image/AoneFlow_feature.jpg",
+    "06-Classification/Git分支管理/image",
+    "03-Tools/ApifoxWebExtension/Apifox-browser-extension.zip",
+    "01-Work/2-kedacom/MPU/显控问题排查总结/mpu_logic_slot.png",
+    "01-Work/2-kedacom/MPU/MSP/01-分布式显控/分布式设计案例/res/kedacom_logo.png",
+    "01-Work/2-kedacom/MPU/MSP/01-分布式显控/分布式设计案例/res/流媒体码流时间戳转换逻辑.png",
+    "01-Work/2-kedacom/MPU/MSP/01-分布式显控/分布式设计案例/res/vsync_adjust_param.png",
+    "01-Work/2-kedacom/MPU/MSP/01-分布式显控/分布式设计案例/res/vo_enable_vsync.png",
+    "01-Work/2-kedacom/MPU/MSP/01-分布式显控/分布式设计案例/res/ptp_capture.png"
   ]
 }

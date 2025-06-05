@@ -1,6 +1,14 @@
+---
+datetime: 2025-06-05T17:33:00
+aliases: 
+tags:
+  - MPU
+  - IPv6
+---
+
 # 显控协议栈IPv4和IPv6兼容问题调研
 
-**前言：**2011年2月3日，全球互联网数字分配机构(IANA)正式宣布已无新的IPv4地址分配。由于我国运营商已申请到的IPv4地址资源数量有限，而随着物联网、移动互联网等应用的快速发展，将会需求大量的地址资源，这势必会对我国互联网持续稳定的发展产生影响，因此解决IPv4地址短缺的问题迫在眉睫。
+**前言：** 2011年2月3日，全球互联网数字分配机构(IANA)正式宣布已无新的IPv4地址分配。由于我国运营商已申请到的IPv4地址资源数量有限，而随着物联网、移动互联网等应用的快速发展，将会需求大量的地址资源，这势必会对我国互联网持续稳定的发展产生影响，因此解决IPv4地址短缺的问题迫在眉睫。
 
 　　从技术本质上讲，解决IPv4地址短缺，可以采用两种不同的技术路线，一种是多级NAT(如NAT444)技术，另一种是IPv6技术，这两种技术是完全对立的。从长远来看，NAT技术并不能从根本上解决地址短缺的问题，而且会增加网络结构的复杂性。目前，业界已达成共识：IPv6技术是当前可行的解决IP地址短缺唯一根本的解决方案。但是由于IPv6与IPv4技术不兼容，而且现网中有大量的IPv4设备和用户存在，需要在网络演进过程中解决异构网络的共存与互通问题。
 
@@ -8,7 +16,7 @@
 
 当前显控平台软件协议定义及各微服务实现仅支持IPv4的网络环境，为适应未来IPv6网络环境或IPv4/IPv6混合网络环景，整理了目前代码实现上存在限制的点，并预研相关解决方案。
 
-![Network diagram shows a IPv6 network connected to a IPv4 network](.\resource\IPv6AndIPv4.gif)
+![image](./resource/IPv6AndIPv4.gif)
 
 走读显控协议代码(msplib)，目前显控协议定义及服务实现上主要存在以下缺陷。
 
@@ -28,7 +36,7 @@
 
 ### 1、IPv4/IPv6双栈
 
-![img](.\resource\双栈)
+![img](./resource/双栈)
 
 ​    双栈技术，是指在终端各类应用系统、运营支撑系统和各网络节点之间同时运行IPv4和IPv6协议栈(两者具有相同的硬件平台)，从而实现分别与IPv4或IPv6节点间的信息互通。
 
@@ -50,7 +58,6 @@
 
 
 
-# 
 
 
 
@@ -82,7 +89,7 @@
 
 ##### TCP Demo基本流程
 
-![Socket](.\resource\tcp.gif)
+![Socket](./resource/tcp.gif)
 
 ##### TCP服务端Demo
 
@@ -374,9 +381,9 @@ int main(int argc, char* argv[])
 }
 ```
 
-![img](.\resource\tcpclient.jpg) 
+![img](./resource/tcpclient.jpg) 
 
-![img](.\resource\tcpserver.jpg) 
+![img](./resource/tcpserver.jpg) 
 
  
 
@@ -396,7 +403,7 @@ int main(int argc, char* argv[])
 	s32 nLwsLoglv = LLL_USER | LLL_ERR | LLL_WARN | LLL_NOTICE;
 	lws_set_log_level(nLwsLoglv, NULL);
 ```
-![img](.\resource\websocket_err.jpg)
+![img](./resource/websocket_err.jpg)
 
 
 
@@ -591,9 +598,9 @@ SSL_EAY_RELEASE:FILEPATH=SSL_EAY_RELEASE-NOTFOUND
 
 编译完成之后，测试监听连接
 
-![img](.\resource\websocket_test1.jpg) 
+![img](./resource/websocket_test1.jpg) 
 
-![img](.\resource\websocket_test2.jpg) 
+![img](./resource/websocket_test2.jpg) 
 
  
 
@@ -629,7 +636,7 @@ void CGrpcServer::Run()
 
 ##### GRPC监听测试
 
-![img](.\resource\grpctest.jpg)
+![img](./resource/grpctest.jpg)
 
 #  
 

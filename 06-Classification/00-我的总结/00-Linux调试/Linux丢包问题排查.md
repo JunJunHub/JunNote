@@ -1,3 +1,13 @@
+---
+datetime: 2025-06-05T17:16:00
+aliases:
+  - 显控服务器丢包问题排查记录
+tags:
+  - Linux
+  - Net
+  - MPU
+  - Linux/tools/ethtool
+---
 ## Linux丢包问题排查
 
 **关键字**：/sys/class/net/em2/statistics/、/proc/net/dev、ethtool、ifconfig、netstat、iftop

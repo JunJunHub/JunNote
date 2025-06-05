@@ -1,3 +1,12 @@
+---
+datetime: 
+aliases:
+  - Linux 调试手段
+tags:
+  - Linux
+  - GDB
+---
+
 [TOC]
 
 # Ⅰ Linux常用调试手段(C/C++)

@@ -1,3 +1,13 @@
+---
+datetime: 2025-06-05T17:27:00
+aliases:
+  - Docker 实践
+tags:
+  - Docker
+  - Linux
+  - CrossCompiler
+---
+
 <img src="./kedacom_logo.png" alt="kedacom" style="zoom:100%;margin-right:auto; margin-left:0; display:block;" />
 <br><br><br><br><br>
 <h1 align = "center" > 基于Docker搭建Linux编译环境 </h1>
