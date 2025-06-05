@@ -81,7 +81,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 443.5
+    "width": 214.5
   },
   "right": {
     "id": "efd2c69f19ce5c9d",
@@ -153,13 +153,23 @@
               "icon": "lucide-list",
               "title": "工作随笔 的大纲"
             }
+          },
+          {
+            "id": "18052a268c7388a4",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {},
+              "icon": "git-pull-request",
+              "title": "Source Control"
+            }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
-    "width": 465.5
+    "width": 532.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -168,11 +178,13 @@
       "canvas:新建白板": false,
       "daily-notes:打开/创建今天的日记": false,
       "templates:插入模板": false,
-      "command-palette:打开命令面板": false
+      "command-palette:打开命令面板": false,
+      "obsidian-git:Open Git source control": false
     }
   },
   "active": "e727a02ec2cf9d5d",
   "lastOpenFiles": [
+    "resource/双栈.md",
     "01-Work/2-kedacom/工作随笔.md",
     "06-Classification/00-我的总结/Mysql 双机冗余.md",
     "06-Classification/00-我的总结/SQLite3.md",
@@ -192,7 +204,6 @@
     "06-Classification/00-我的总结/SWIG/SWIG封装C++库.md",
     "06-Classification/00-我的总结/resource_images/test.mp4",
     "06-Classification/00-我的总结/IPv6兼容/显控协议IPv6兼容问题.md",
-    "resource/双栈.md",
     "resource",
     "06-Classification/00-我的总结/Golang/gocn-GoFrame框架介绍及设计.pdf",
     "06-Classification/00-我的总结/Docker/显控组Linux编译机环境使用流程.md",
