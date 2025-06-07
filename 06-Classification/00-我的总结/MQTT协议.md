@@ -3,7 +3,7 @@ datetime:
 aliases:
   - MQTT 协议
 tags:
-  - MQTT
+  - Protocol/MQTT
 ---
 
 # MQTT协议

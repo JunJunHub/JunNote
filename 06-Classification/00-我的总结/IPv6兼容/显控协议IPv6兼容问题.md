@@ -3,7 +3,7 @@ datetime: 2025-06-05T17:33:00
 aliases: 
 tags:
   - MPU
-  - IPv6
+  - Protocol/IPv6
 ---
 
 # 显控协议栈IPv4和IPv6兼容问题调研

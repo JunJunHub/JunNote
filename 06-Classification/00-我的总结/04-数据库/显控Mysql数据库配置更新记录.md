@@ -2,9 +2,8 @@
 datetime: 2025-06-05T17:22:00
 aliases: 
 tags:
-  - MPU
   - MPU/MYSQL
-  - MYSQL
+  - DB/MYSQL
 ---
 [TOC]
 <div STYLE="page-break-after: always;"></div>
