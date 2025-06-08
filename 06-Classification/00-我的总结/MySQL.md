@@ -3,8 +3,7 @@ datetime:
 aliases:
   - Mysql 数据库配置
 tags:
-  - MYSQL
-  - DB
+  - DB/MYSQL
 ---
 
 # 概念：

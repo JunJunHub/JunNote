@@ -2,7 +2,7 @@
 aliases:
   - NAT 穿透技术原理
 tags:
-  - NAT
+  - Protocol/NAT
 ---
 # NAT 穿透技术原理及企业级实践
 

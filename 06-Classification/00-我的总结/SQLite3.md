@@ -2,8 +2,7 @@
 datetime: 
 aliases: 
 tags:
-  - DB
-  - SQLite3
+  - DB/SQLite3
 ---
 
 ## SQLite3
