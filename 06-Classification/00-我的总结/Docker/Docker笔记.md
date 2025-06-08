@@ -316,8 +316,107 @@ https://download.docker.com/linux/
 |            |                |                                                       |      |
 
 
+## Docker 安装
+
+
+### Linux-Ubuntu
+
+[如何在 Ubuntu 24.04 LTS 上安装 Docker - 系统极客](https://www.sysgeek.cn/install-docker-ubuntu/)
+```
+sudo apt update
+sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
+### 🔧 **一、安装准备**
+
+1. **卸载旧版本**（如存在）
+    sudo apt remove docker docker-engine docker.io containerd runc -y
+    sudo rm -rf /var/lib/docker /etc/docker
+    
+2. **安装依赖工具**
+    sudo apt update
+    sudo apt install -y apt-transport-https ca-certificates curl gnupg lsb-release software-properties-common
+---
+
+### ⚙️ **二、安装Docker引擎**
+
+1. **添加阿里云镜像源**（国内加速）310
+    # 导入GPG密钥（适配Ubuntu 24.04）
+    curl -fsSL https://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/aliyun-docker.gpg
+    
+    # 添加仓库
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/aliyun-docker.gpg] https://mirrors.aliyun.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    
+2. **安装Docker**
+    sudo apt update
+    sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+    
+3. **启动并验证**
+    sudo systemctl start docker
+    sudo systemctl enable docker
+    sudo docker run hello-world  # 显示"Hello from Docker!"即成功
+    
+
+---
+
+### 🌐 **三、配置国内镜像加速**
+
+1. **选择镜像源**（推荐阿里云/腾讯云）
+    
+    |**服务商**|**加速地址**|**特点**|
+    |---|---|---|
+    |阿里云|`https://<你的ID>.mirror.aliyuncs.com`|需[注册获取专属URL]1|
+    |腾讯云|`https://mirror.ccs.tencentyun.com`|开箱即用6|
+    |USTC|`https://docker.mirrors.ustc.edu.cn`|教育网优化2|
+    
+2. **配置加速器**
+    sudo tee /etc/docker/daemon.json <<-'EOF'
+    {
+      "registry-mirrors": [
+        "https://mirror.ccs.tencentyun.com",  # 腾讯云
+        "https://docker.mirrors.ustc.edu.cn"   # 中科大
+      ]
+    }
+    EOF
+    
+    > 💡 多镜像源可并行使用，Docker会自动选择最快节点48。
+    
+3. **重启生效**
+    sudo systemctl daemon-reload
+    sudo systemctl restart docker
+    # 验证配置
+    docker info | grep "Registry Mirrors" -A 5
+    
+
+---
+
+### 🔑 **四、权限管理**
+
+1. **允许非root用户操作**
+    sudo usermod -aG docker $USER  # 当前用户加入docker组
+    newgrp docker  # 立即生效组权限
+    
+    > ⚠️ 无需重启，后续命令可省略`sudo`。
+    
+
+---
+
+### 🛠️ **五、后续优化**
+
+1. **安装Docker Compose**
+    sudo apt install -y docker-compose-plugin
+    docker compose version  # 验证安装
+    
+2. **部署Portainer可视化工具**
+    docker run -d -p 9000:9000 --name portainer \
+      -v /var/run/docker.sock:/var/run/docker.sock \
+      -v portainer_data:/data \
+      portainer/portainer-ce
+    
+    访问 `http://<服务器IP>:9000` 初始化管理界面57。
 <div STYLE="page-break-after: always;"></div>
-## Docker基础命令
+
+
+## Docker 基础命令
 
 [Docker reference | Docker Documentation -- 官方文档](https://docs.docker.com/engine/reference/run/)
 
