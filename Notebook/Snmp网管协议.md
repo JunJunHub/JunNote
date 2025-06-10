@@ -1,5 +1,5 @@
 ---
-Date: 2025-06-03T17:28:00
+date: 2025-06-03T17:28:00
 aliases:
   - Simple Network Management Protocol, SNMP；简单的网络管理协议
 tags:
