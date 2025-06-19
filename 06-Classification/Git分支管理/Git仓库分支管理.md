@@ -6,6 +6,7 @@ aliases:
 tags:
   - Git
   - MPU
+  - SVN
 ---
 
 # Git 仓库分支管理
@@ -274,11 +275,8 @@ Release 稳定，如何确认可以合并的时间节点?
 - 场景排序
 
 - 会议调度
-
   - 支持会议调度常用功能
-
   - 支持对接 4.7 MCU
-
   - 支持会议电视墙
   - 支持添加终端入会(无通讯录)
   - 支持会议轮询
@@ -299,7 +297,7 @@ Release 稳定，如何确认可以合并的时间节点?
 
 **V2R1B2 独有未合并至 V2R1B3 功能**
 
-**注：**后续项目 B2 或 B3 版本升级需要下面的功能，可以直接升 V2R1B4 第一个稳定版
+**注：** 后续项目 B2 或 B3 版本升级需要下面的功能，可以直接升 V2R1B4 第一个稳定版
 
 - 级联功能修改
 - 葡萄牙语支持            -- B3 开发功能未翻译支持
@@ -485,17 +483,17 @@ Release 稳定，如何确认可以合并的时间节点?
 
 #### 5.4、Hotfix 分支维护
 
-> **TODO：**实际应用过程中完善 hotfix 分支维护规则
+> **TODO：** 实际应用过程中完善 hotfix 分支维护规则
 >
 > - Release 发布后创建对应 hotfix 用于处理现场发现的遗留 BUG，处理一批 BUG 后根据实际情况确定是否发布子版本或更打 tag
 >
 > 
 >
-> 1、Hotfix 发现历史版本有 BUG 需要修复时创建，根据问题的严重程度**[普通、严重]**与问题发现方式**[测试过程中、项目现场]**；Hotfix 有不同的验证流程以及合并回主流的方式。
+> 1、Hotfix 发现历史版本有 BUG 需要修复时创建，根据问题的严重程度 **[普通、严重]** 与问题发现方式 **[测试过程中、项目现场]** ；Hotfix 有不同的验证流程以及合并回主流的方式。
 >
 > | Hotfix 处理方式 | 普通                                                         | 严重                                                         |
 > | --------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-> | 测试阶段        | **基于最新发布的 Tag 拉取 hotfix 分支**<br />修复后合并至当前测试阶段 Release 版本验证.<br />验证通过后 hotfix 不用合并至主分支，与当前 Release 发布后合回 Master<br />**其它已发布 Release 不处理，只更新遗留问题清单** | **测试阶段**修复测试流程相同<br />hotfix要合并到其它Release<br />需要针对特定版本进行验证<br />验证通过后对应版本更新问题修复记录 |
+> | 测试阶段        | **基于最新发布的 Tag 拉取 hotfix 分支** <br />修复后合并至当前测试阶段 Release 版本验证.<br />验证通过后 hotfix 不用合并至主分支，与当前 Release 发布后合回 Master<br />**其它已发布 Release 不处理，只更新遗留问题清单** | **测试阶段**修复测试流程相同<br />hotfix要合并到其它Release<br />需要针对特定版本进行验证<br />验证通过后对应版本更新问题修复记录 |
 > | 项目现场        | 基于对应版本 Tag 拉取 hotfix 分支<br />修复后合并至项目现场对应版本测试.<br />验证通过后 hotfix 合并至 Master<br />**其它已发布 Release 不处理，只更新遗留问题清单** | **现场问题**修复测试流程相同<br />hotfix要合并到其它 Release<br />需要针对特定版本进行验证<br />验证通过后对应版本更新问题修复记录 |
 >
 > 2、Hotfix 分支由 BUG 责任人本地创建
@@ -513,7 +511,6 @@ Release 稳定，如何确认可以合并的时间节点?
 #### 6.2 提交信息规范
 
 **Git 延用之前 SVN 上提交信息规范，可以与 SVN 仓库同步提交记录**
-
 ```shell
 关键字1 关键字2 关键字3 标题
 修改说明：
@@ -529,7 +526,6 @@ Release 稳定，如何确认可以合并的时间节点?
 ```
 
 **示例：**
-
 ```
 BUG[id]   缺陷修复
 ADD[id]   需求新增功能
@@ -584,7 +580,6 @@ IN 需求 mpuaps DEL[494646]:删除排序功能
 ##### 6.3.1 Feature 分支修改提测过程
 
 > 此流程，每个开发都需要熟悉
-
 ```shell
 #切换到对应 Feature 分支并创建本地分支，实现功能及修复BUG
 #如果分支已存在，直接切换至 feature 分支: git checkout feature/V2R1B4_1.0_UbuntuVerBugFix
@@ -622,7 +617,6 @@ git push origin release/V2R1B4_1.0
 ##### 6.3.2 Release 分支发布过程
 
 > 此流程是 Release 测试稳定后由管理员操作
-
 ```shell
 #如果基于同一个 Tag 拉取了多个 Release 分支在同步开发，并且有其它的 Release 已经先发布了，并已同步至 Master; 
 #先拉取 Master 最新代码并解决冲突 > 测试冲突；不存在此场景则可忽略此步骤;
@@ -655,14 +649,12 @@ git push origin V2R1B4_1.0.0
 > 如果需要修改，就要 git checkout -b branch tag 创建一个基于指定 tag 的分支，例如：git checkout -b tset v0.1.0 这个时候就会在分支上进行开发，之后可以切换到主线合并。
 
 **创建 Hotfix 分支，方式一：**
-
 ```shell
 #创建并切换到分支
 git checkout -b hotfix/V2R1B4_1.0.0_XXX  V2R1B4_1.0.0
 ```
 
 **创建 Hotfix 分支，方式二：**
-
 ```shell
 #切换到主分支
 git checkout master
@@ -696,7 +688,6 @@ git checkout hotfix/V2R1B4_1.0.0_XXX
 ```
 
 **合并 Hotfix 过程：**
-
 ```shell
 #切换到 Hotfix 开始修复BUG
 git checkout hotfix/V2R1B4_1.0.0_XXX
@@ -771,7 +762,6 @@ git push origin --delete hotfix/V2R1B4_1.0.0_XXX
 ### Git 分支管理
 
 #### Git 分支查看
-
 ```shell
 #列出所有本地分支
 git branch -l
@@ -785,7 +775,6 @@ git branch -a
 #### Git 分支合并
 
 > 不同的团队，采用的合并策略不同
-
 ```shell
 在多人协作的 Git 版本控制中，有时候合并操作（merge）可能不会记录合并提交，这通常发生在所谓的“快进模式”（fast-forward mode）下。以下是几种可能导致合并没有记录的情况：
 
@@ -805,7 +794,6 @@ git branch -a
 
 
 #### Git 分支删除
-
 ```shell
 #远程服务器上删除分支，本地同步
 git fetch -p
@@ -830,7 +818,6 @@ git push origin :<branch_name>
 ### Git 标签
 
 #### 查看标签
-
 ```shell
 #列出现有标签
 git tag
@@ -850,7 +837,6 @@ git show V2R1B4_1.0.0
 > Git 打标签默认是基于当前分支最后一次提交。也可以指定提交ID打标签。
 
 ##### 含附注的标签
-
 ```shell
 git tag -a V2R1B4_1.0.0 -m 'Release V2R1B4_1.0.0'
 
@@ -862,10 +848,8 @@ git tag -s V2R1B4_1.0.0 -m 'signed V2R1B4_1.0.0 tag'
 ```
 
 ##### 轻量级标签
-
 ```shell
 git tag V2R1B4_1.0.0
-
 
 #轻量级标签后期加标注
 git tag -a V2R1B4_1.0.0 9dbec82
@@ -888,87 +872,75 @@ git tag -a V2R1B4_1.0.0 9dbec82
 #### Git 修改提交描述
 
 
-
 #### Git 撤销提交（回退）
 
 如果你需要撤销某次提交并同步到远程仓库，可以使用 git revert 或 git reset 命令。这两种方法有不同的用途和效果。
 
-**方式一：git revert**
+##### **方式一：git revert**
+使用 git revert 撤销某次提交
+git revert 会创建一个新的提交来撤销指定的提交。这个新提交会包含撤销的内容，因此不会重写历史记录。这是推荐的方法，因为它不会影响其他开发者的分支。
+```shell
+#找到要撤销的提交的哈希值
+#使用 git log 查看提交历史，找到要撤销的提交的哈希值。
+git log
+ 
+#撤销指定的提交
+#使用 git revert 命令撤销指定的提交。
+git revert <commit-hash>
+ 
+#推送更改到远程仓库
+#将新的撤销提交推送到远程仓库。
+git push origin master
+```
 
-> 使用 git revert 撤销某次提交
-> git revert 会创建一个新的提交来撤销指定的提交。这个新提交会包含撤销的内容，因此不会重写历史记录。这是推荐的方法，因为它不会影响其他开发者的分支。
->
-> ```shell
-> #找到要撤销的提交的哈希值
-> #使用 git log 查看提交历史，找到要撤销的提交的哈希值。
-> git log
-> 
-> #撤销指定的提交
-> #使用 git revert 命令撤销指定的提交。
-> git revert <commit-hash>
-> 
-> #推送更改到远程仓库
-> #将新的撤销提交推送到远程仓库。
-> git push origin master
-> ```
+##### **方式二：git reset**
 
-**方式二：git reset**
-
-> 使用 git reset 撤销某次提交
-> git reset 会重置当前分支的 HEAD 到指定的提交，并且可以选择是否保留工作目录中的更改。这种方法会重写历史记录，因此需要谨慎使用。
->
-> ```shell
-> #找到要撤销的提交的哈希值
-> #使用 git log 查看提交历史，找到要撤销的提交的哈希值。
-> git log
-> 
-> #重置到指定的提交
-> #使用 git reset 命令重置到指定的提交。有三种模式可以选择：
-> #  --soft：只移动 HEAD 到指定的提交，但保留工作目录和索引。
-> #  --mixed（默认）：移动 HEAD 到指定的提交，并重置索引，但保留工作目录。
-> #  --hard：移动 HEAD 到指定的提交，并重置索引和工作目录。
-> #例如，撤销最近一次提交并保留工作目录中的更改：
-> git reset --soft HEAD~1
-> #或者，撤销最近一次提交并丢弃工作目录中的更改：
-> git reset --hard HEAD~1
-> 
-> #强制推送更改到远程仓库
-> #由于你重写了历史记录，需要使用 --force 或 --force-with-lease 选项强制推送更改到远程仓库。
-> git push origin master --force
-> #或者使用更安全的 --force-with-lease 选项：
-> git push origin master --force-with-lease
-> ```
-
-
-
-
+使用 git reset 撤销某次提交
+git reset 会重置当前分支的 HEAD 到指定的提交，并且可以选择是否保留工作目录中的更改。这种方法会重写历史记录，因此需要谨慎使用。
+ ```shell
+#找到要撤销的提交的哈希值
+#使用 git log 查看提交历史，找到要撤销的提交的哈希值。
+git log
+ 
+#重置到指定的提交
+#使用 git reset 命令重置到指定的提交。有三种模式可以选择：
+#  --soft：只移动 HEAD 到指定的提交，但保留工作目录和索引。
+#  --mixed（默认）：移动 HEAD 到指定的提交，并重置索引，但保留工作目录。
+#  --hard：移动 HEAD 到指定的提交，并重置索引和工作目录。
+#例如，撤销最近一次提交并保留工作目录中的更改：
+git reset --soft HEAD~1
+#或者，撤销最近一次提交并丢弃工作目录中的更改：
+git reset --hard HEAD~1
+ 
+#强制推送更改到远程仓库
+#由于你重写了历史记录，需要使用 --force 或 --force-with-lease 选项强制推送更改到远程仓库。
+git push origin master --force
+#或者使用更安全的 --force-with-lease 选项：
+git push origin master --force-with-lease
+```
 
 ### Git 忽略文件
 
 #### .gitignore 生效规则
 
-> 一个项目中的多个路径下都存在 .gitignore 配置，他们是如何生效的？多个 .gitignore 规则冲突时是如何生效的？
+一个项目中的多个路径下都存在 .gitignore 配置，他们是如何生效的？多个 .gitignore 规则冲突时是如何生效的？
 
 在 Git 项目中，.gitignore 文件可以存在于项目的不同目录层级中，并且它们的规则是累积生效的。也就是说，Git 会从根目录开始查找 .gitignore 文件，并应用其中的规则，然后进入子目录，继续查找并应用该目录下的 .gitignore 文件中的规则。因此，一个文件是否被忽略是根据所有适用的 .gitignore 规则来决定的。
 
 当存在多个 .gitignore 文件时，规则的应用顺序如下：
 
-- **全局 .gitignore 文件：**如果配置了全局的 .gitignore 文件（通过 git config --global core.excludesfile 命令），它的规则会被首先应用。
+- 全局 .gitignore 文件：如果配置了全局的 .gitignore 文件（通过 git config --global core.excludesfile 命令），它的规则会被首先应用。
 
-- **仓库根目录下的 .gitignore 文件：**位于 Git 仓库根目录的 .gitignore 文件中的规则。
+- 仓库根目录下的 .gitignore 文件：位于 Git 仓库根目录的 .gitignore 文件中的规则。
 
-- **其他各级子目录中的 .gitignore 文件：**各个子目录中的 .gitignore 文件。这些文件仅影响它们所在目录及其子目录中的文件。
+- 其他各级子目录中的 .gitignore 文件： 各个子目录中的 .gitignore 文件。这些文件仅影响它们所在目录及其子目录中的文件。
 
-关于冲突问题，如果有两个或多个 .gitignore 规则互相矛盾，例如一个规则忽略了某个文件，而另一个规则又明确包含该文件，则：
+**关于冲突问题，如果有两个或多个 .gitignore 规则互相矛盾，例如一个规则忽略了某个文件，而另一个规则又明确包含该文件，则：**
 
 最具体的规则优先。通常来说，在更深层级的目录中定义的规则更加具体，因为它们只适用于那个目录和其子目录。所以如果在子目录中有与根目录 .gitignore 文件相冲突的规则，**子目录中的规则将覆盖根目录中的规则。**
-如果在同一级别的 .gitignore 文件中有冲突的规则，那么后面的规则会覆盖前面的规则（按文件中的顺序）。
-使用感叹号 ! 可以取消忽略，即如果先有一个规则忽略了所有 .log 文件，之后的规则 !.important.log 将会取消对名为 important.log 的文件的忽略。
-需要注意的是，一旦文件已经被纳入版本管理（即已经提交到了 Git 仓库），修改 .gitignore 文件不会自动停止追踪这些文件。要让 .gitignore 对已跟踪的文件生效，你需要先停止追踪这些文件（使用 git rm --cached <file>），然后再提交更改。
-
-```shell
-#
-```
+如果在同一级别的 .gitignore 文件中有冲突的规则，**那么后面的规则会覆盖前面的规则（按文件中的顺序）。**
+使用感叹号 `!` 可以取消忽略，即如果先有一个规则忽略了所有 .log 文件，之后的规则 `!.important.log` 将会取消对名为 important.log 的文件的忽略。
+需要注意的是，一旦文件已经被纳入版本管理（即已经提交到了 Git 仓库），修改 .gitignore 文件不会自动停止追踪这些文件。要让 .gitignore 对已跟踪的文件生效，你需要先停止追踪这些文件（使用 `git rm --cached <file>`），然后再提交更改。
 
 ### Git LFS
 
@@ -998,13 +970,13 @@ git tag -a V2R1B4_1.0.0 9dbec82
 >
 > 通过这些措施，可以有效地管理和优化包含大量大文件的 Git 仓库，提高开发效率和仓库的可维护性
 
-**注意：**为了减少仓库体积，以及频繁提交大量二进制文件带来 Git 仓库体积过大的问题，/10-common/lib 下的文件可以只在 SVN 上维护。业务模块二进制文件应该由自动编译生成。如果后面整个 Git 仓库体积太大，还要考虑拆分成多个子仓库(git submodule)。
+**注意：** 为了减少仓库体积，以及频繁提交大量二进制文件带来 Git 仓库体积过大的问题，/10-common/lib 下的文件可以只在 SVN 上维护。业务模块二进制文件应该由自动编译生成。如果后面整个 Git 仓库体积太大，还要考虑拆分成多个子仓库(git submodule)。
 
 #### Git LFS 使用问题记录
 
 [详解 Git 大文件存储（Git LFS） - 苍青浪 - 博客园 (cnblogs.com)](https://www.cnblogs.com/cangqinglang/p/13097777.html)
 
-**问题1：**git lfs pull 拉取文件到本地，git status 检测文件状态是变更的，并直接 add 到暂存区?（工作区 lfs 指针文件 -> 原始文件 ，正常不应该检测到文件变化）
+**问题1：** git lfs pull 拉取文件到本地，git status 检测文件状态是变更的，并直接 add 到暂存区?（工作区 lfs 指针文件 -> 原始文件 ，正常不应该检测到文件变化）
 
 ​              --  ubuntu 环境存在此问题，windows 环境正常
 
@@ -1028,13 +1000,11 @@ git lfs checkout <filename>
 ```
 
 
-
-**问题2：**git lfs 处理过的文件，又被直接提交到仓库中
+**问题2：** git lfs 处理过的文件，又被直接提交到仓库中
 
 [How to resolve the issue "Encountered 1 file(s) that should have been pointers, but weren't" · Issue #2839 · git-lfs/git-lfs (github.com)](https://github.com/git-lfs/git-lfs/issues/2839)
 
 如果某位成员本地未安装 git lfs，一些已经被 git lfs 处理的大文件，有可能被误操作错误的直接提交到仓库中 ！！! 
-
 ```shell
 Tiger@DESKTOP-KFMJ3IA MINGW64 /f/project/MPUGIT (release/V2R1B4_1.0)
 $ git lfs migrate import --include-ref=HEAD~10 --include=40-servers/mpuaps/library/mcusdk/lib/ubuntu_amd64/release/libkdvmedianet.so
@@ -1067,10 +1037,7 @@ Encountered 1 file that should have been a pointer, but wasn't:
 Tiger@DESKTOP-KFMJ3IA MINGW64 /f/project/MPUGIT (release/V2R1B4_1.0)
 ```
 
-
-
 方法一、修改提交历史
-
 ```
 #这个命令会将历史提交中的大文件转换为 LFS 对象
 git lfs migrate import --include='*.a' --everything
@@ -1080,19 +1047,13 @@ git add --renormalize .
 git commit -m "Fix broken LFS files"
 ```
 
-
-
 方法二、如果错误提交之后没有很多提交，可以直接回退上次错误的提交
-
 ```shell
 git reset --hard
 git push --force origin xxx
 ```
 
-
-
 ### Git SVN
-
 ```shell
 # git svn 初始化
 git svn init -s clone http://172.16.6.108/svn/MSP/branches/20241128_msp_master
@@ -1108,13 +1069,25 @@ git svn dcommit
 ```
 
 
+## 四、SVN 常用命令
 
-## 四、显控代码 SVN 迁 Git 记录
+### SVN 回退
+#### svn revert
+```shell
+# SVN 还原代码命令
+## 递归还原所有文件
+svn revert --depth infinity .
+## 递归还原所有指定目录所有文件
+svn revert --depth infinity mpuaps
+## 撤销单个文件
+svn revert xxx
+```
+
+## 五、显控代码 SVN 迁 Git 记录
 
 ### Git 仓库初始化
 
-**注意：**GitLab 服务器限制单文件最大 10M，超过上限需要 LFS 管控；GitLab 服务器未限制单仓库大小；GitLab 单次推送数据量有上限；  
-
+**注意：** GitLab 服务器限制单文件最大 10M，超过上限需要 LFS 管控；GitLab 服务器未限制单仓库大小；GitLab 单次推送数据量有上限；  
 ​           -- CMO 的回答，实测此回复不正确，大于 10M 的文件也能正常提交，估计是受单次推送数据量的限制 。
 
 [git-lfs 指南 - MartinLwx - 博客园 (cnblogs.com)](https://www.cnblogs.com/MartinLwx/p/15586730.html)
@@ -1130,7 +1103,6 @@ git svn dcommit
 > 基于 SVN 服务器代码，创建本地 Git 仓库
 
 **采用方式，不保留之前版本的提交记录**
-
 ```shell
 #1、CMO 创建 SVN 主分支(不包含任何文件)
 # http://172.16.6.108/svn/MSP/branches/20241128_msp_master mpu_master
@@ -1146,11 +1118,7 @@ git svn clone http://172.16.6.108/svn/MSP/branches/20241128_msp_master mpu_maste
 #5、分批次添加提交文件
 ```
 
-
-
 #### **Git-SVN 测试**
-
-
 ```shell
 # 基于 SVN 初始化本地 Git 仓库；git svn clone 会从 SVN 仓库中提取所有历史记录并转换为 Git 提交
 # 耐心等待，这个过程耗时约：50min[14:24:50 - 15:16:10]
@@ -1184,8 +1152,6 @@ git commit -m "IN 需求 Git-SVN Init
 自测结果: 自测通过"
 ```
 
-
-
 CMO 说 GitLab 服务器限制单文件最大 10M，实际好像并不仅仅是 10M 限制。单次推送提交的数据量大，也会引起下面的 git push 失败的问题
 
 如果单次向 GitLab 服务器 push 的数据量过大，会推送失败，需要分批推送。
@@ -1199,7 +1165,6 @@ CMO 说 GitLab 服务器限制单文件最大 10M，实际好像并不仅仅是 
 1、先查找存在大文件的目录
 
 2、脚本查找所有大于 10M 的文件，相关文件添加 git lfs track
-
 ```shell
 # 可以直接编辑 .gitattributes
 ...
@@ -1217,7 +1182,6 @@ CMO 说 GitLab 服务器限制单文件最大 10M，实际好像并不仅仅是 
 ```
 
 3、删除相关路径文件及提交历史记录
-
 ```shell
 # 删除文件及其历史记录
 git filter-branch --force --index-filter "git rm --cached -r --ignore-unmatch '10-common/lib/'" --prune-empty --tag-name-filter cat -- --all
@@ -1238,9 +1202,7 @@ git push --force-with-lease origin main
 
 40-servers/mpuaps、40-servers/mpuaps/document、40-servers/mpuaps/vendor、40-servers/mpuaps/library
 
-
 ```
-
 4、git add 分批次添加相关文件，并提交
 
 5、git push 分批次推送
@@ -1284,7 +1246,6 @@ Please see the above messages for details.
 
 
 > 提交格式
-
 ```shell
 git commit -m "IN 需求 Init Git-SVN
 修改说明: Git-SVN Add mpuaps;
@@ -1520,17 +1481,11 @@ $ cat /etc/logrotate.d/mpu_svn_sync_git
 ```
 
 
-
-
-
-#### SVN 提交方式一
+#### 方式一：git svn dcommit
 
 > git svn dcommit
->
 > 优点是不用存很多份 SVN 仓库代码，而且 SVN 和 Git 都有完整的提交记录。
->
-> 缺点是**要基于 SVN 初始化 Git 仓库；**SVN 服务器有固定的提交格式，需要 Git 提交记录按照 SVN 的规范写。
-
+> 缺点是**要基于 SVN 初始化 Git 仓库；** SVN 服务器有固定的提交格式，需要 Git 提交记录按照 SVN 的规范写。
 ```shell
 # git svn 初始化
 # 主分支初始化示例
@@ -1542,9 +1497,7 @@ $ git svn dcommit
 ```
 
 ##### 写错了 commit msg 格式，提交到 SVN 被拒如何处理？
-
 > 同步脚本支持自动发邮件。先在 git 上修改对应提交记录，重新尝试提交。
-
 ```shell
 Tiger@DESKTOP-KFMJ3IA MINGW64 /f/project/Git_SVN_Clone/msp_vob (master)
 $ git svn dcommit
@@ -1584,201 +1537,207 @@ Please see the above messages for details.
 ##### **Git 修改提交消息**
 
 ###### 修改最近一次提交消息
-
 ```shell
 git commit --amend -m ""
 ```
-
 ###### 修改历史提交消息
-
 ```shell
 git
 ```
 
-
-
-
-
-#### SVN 提交方式二
+#### 方式二：svn commit
 
 > 通过 SVN 命令行工具提交(Linux|Win)都支持 [Downloads | VisualSVN](https://www.visualsvn.com/downloads/)
 >
 > 需要有个服务器存所有版本的 SVN 仓库，将仓库关联到对应 Git 分支
 >
-> **注意：**维护好 SVN ignore 、Git ignore
->
-> ```shell
-> #从 git 下载代码
-> mkdir mpu_v2r1b4 && cd mpu_v2r1b4 && git clone xxx .
-> 
-> #删除所有文件(除了.git文件夹)
-> rm -rf 10-common 20-alg 30-client 40-servers 50-media 60-ec 70-protocol .gitattributes .gitignore readme.md svn_sync_git_commit.bat
-> 
-> #从 svn 下载代码至同一路径[.svn]
-> svn checkout xxx . 
-> 
-> # SVN 设置忽略文件夹
-> ## 忽略 .git 文件夹
-> svn propset svn:ignore .git .
-> ## 忽略 40-servers/mpuaps/document 文件夹；文档 SVN 不用同步
-> cd 40-servers/mpuaps/document && svn propset svn:ignore document .
-> 
-> # SVN 提交属性（忽略文件配置）
-> svn commit -m "IN 需求 Git-SVN
-> 修改说明: SVN ignore;
-> 波及分析: 无
-> 平台/产品/模块: 无
-> 自测结果: 自测通过"
-> 
-> #基于 git 还原代码
-> git reset --hard
-> 
-> #查看 svn status 查看更改内容[git 与 svn 仓库代码差别]
-> #比对提交代码至 svn
-> 
-> 
-> 
-> # SVN 还原代码命令
-> ## 递归还原所有文件
-> svn revert --depth infinity .
-> ## 撤销单个文件
-> svn revert xxx
-> 
-> 
-> # 之前 SVN 仓库设置的忽略配置规则，导致有些文件没有正确同步提交到 SVN；
-> # SVN 需要重新配置一些路径或文件的忽略规则
-> 
-> # SVN 忽略配置命令
-> ## 查看指定目录所有文件的属性详情
-> $ svn proplist -R -v 10-common
-> “.” 上的属性:
->   svn:ignore
->     .git
-> 
->   svn:mergeinfo
->     /branches/20230602_MSP_V2R1B2/msp_vob:26810-26813,26849-26850,26867,26895
->     /branches/20231204_MSP_V2R1B3/msp_vob:26808,26816-26817,27000,27099,27117,27191,27274,27362,28008
->     /trunk/mspv1/msp_vob:28006
-> “10-common/doc/Git分支管理/AoneFlow_feature.jpg” 上的属性:
->   svn:mime-type
->     application/octet-stream
-> “10-common/doc/Git分支管理/AoneFlow_master.jpg” 上的属性:
->   svn:mime-type
->     application/octet-stream
-> “10-common/doc/Git分支管理/AoneFlow_release.jpg” 上的属性:
->   svn:mime-type
->     application/octet-stream
-> ....
-> .... 
-> 
-> $ svn proplist -R -v 30-client/mspweb/msplanguage/
-> “30-client/mspweb/msplanguage” 上的属性:
->   svn:ignore
->     .idea
->     build
->     node_modules
-> 
-> “30-client/mspweb/msplanguage/app/assets/avatar.png” 上的属性:
->   svn:mime-type
->     application/octet-stream
-> “30-client/mspweb/msplanguage/app/assets/layout/leftbg1.png” 上的属性:
->   svn:mime-type
->     application/octet-stream
-> ....
-> ....
-> 
-> 
-> # 查看指定目录下那些文件或子目录被忽略
-> $ svn propget svn:ignore .
-> .git
-> 
-> $ svn propget svn:ignore 10-common/
-> svn:  警告: W200017: Property 'svn:ignore' not found on '10-common'
-> svn: E200000: 发生问题；请参阅其它错误信息
-> 
-> $ svn propget svn:ignore 30-client/mspweb/msplanguage/
-> .idea
-> build
-> node_modules
-> 
-> 
-> # 递归查看指定目录下那些文件或子目录被忽略
-> $ svn propget svn:ignore . -R
-> . - .git
-> 
-> 30-client/mspweb/msp - .idea
-> build
-> node_modules
-> 
-> 30-client/mspweb/msp-ws-lan - .idea
-> build
-> node_modules
-> 
-> 30-client/mspweb/mspbackstage - .idea
-> build
-> node_modules
-> 
-> 30-client/mspweb/msphttp - .idea
-> build
-> node_modules
-> 
-> 30-client/mspweb/msplanguage - .idea
-> build
-> node_modules
-> 
-> 30-client/mspweb/mspmanage - .idea
-> build
-> node_modules
-> 
-> 40-servers/genkey/prj_linux - genkey
-> 
-> 40-servers/mpuaps - document
-> 
-> 40-servers/msplib - demo
-> 
-> 60-ec/web - .git
-> dist
-> node_modules
-> package-lock.json
-> 
-> 60-ec/web/dist - *
-> 
-> 
-> 
-> # 停止忽略某个目录（如果这个目录或文件未被跟踪会报错，因为这个属性是设置在被忽略文件的父目录上的）
-> # 以 30-client/mspweb/msplanguage/node_modules 为例
-> $ svn propdel svn:ignore 30-client/mspweb/msplanguage/node_modules
-> “30-client/mspweb/msplanguage/node_modules” 尚未纳入版本控制
-> svn: E155010: 找不到节点 '/home/project/mpu_v2r1b5/30-client/mspweb/msplanguage/node_modules'。
-> 
-> $ cd 30-client/mspweb/msplanguage/
-> $ ls
-> app  config  docs  env.js  LICENSE  node_modules  package.json  package-lock.json  README.md  scripts
-> 
-> $ svn propdel svn:ignore node_modules
-> “node_modules” 尚未纳入版本控制
-> svn: E155010: 找不到节点 '/home/project/mpu_v2r1b5/30-client/mspweb/msplanguage/node_modules'。
-> 
-> $ svn propdel svn:ignore node_module .
-> “node_module” 尚未纳入版本控制
-> svn: E155010: 找不到节点 '/home/project/mpu_v2r1b5/30-client/mspweb/msplanguage/node_module'。
-> 
-> 
-> # 只能通过更新 msplanguage 的属性重新设置规则
-> $ cd 30-client/mspweb/msplanguage/
-> $ svn propget svn:ignore .
-> idea
-> build
-> node_modules
-> # 同时设置忽略多个文件，必须用换行符隔开
-> $ svn propset svn:ignore '.idea
-> build' .
-> 
-> ```
->
+> **注意：** 维护好 SVN ignore 、Git ignore
+
+##### 仓库关联
+ ```shell
+ #从 git 下载代码
+ mkdir mpu_v2r1b4 && cd mpu_v2r1b4 && git clone xxx .
+ 
+ #删除所有文件(除了.git文件夹)
+ rm -rf 10-common 20-alg 30-client 40-servers 50-media 60-ec 70-protocol .gitattributes .gitignore readme.md svn_sync_git_commit.bat
+ 
+ #从 svn 下载代码至同一路径[.svn]
+ #本地代码仓库路径下会同时包含 .git .svn
+ #支持分别和远程Git、远程SVN仓库同步代码 
+ svn checkout xxx . 
+
+ #基于 git 还原代码
+ git reset --hard
+
+ #############################################################
+ ##至此，本地代码已与远程Git保持一致
+ ##再通过SVN命令将本地代码推送到远程SVN仓库，即可完成同步
+ ##后续定时通过脚本从远程Git拉取代码，再通过SVN命令推送到远程SVN仓库
+ ##即可支持自动同步
+ #############################################################
+
+
+ #######################################
+ ##Git部分文件不需要同步至SVN仓库
+ ##SVN可配置忽略文件
+ #######################################
+ 
+ # SVN 设置忽略文件夹
+ ## 忽略 .git 文件夹
+ svn propset svn:ignore .git .
+ ## 忽略 40-servers/mpuaps/document 文件夹；文档 SVN 不用同步
+ cd 40-servers/mpuaps/document && svn propset svn:ignore document .
+ 
+ # SVN 提交属性（忽略文件配置）
+ svn commit -m "IN 需求 Git-SVN
+ 修改说明: SVN ignore;
+ 波及分析: 无
+ 平台/产品/模块: 无
+ 自测结果: 自测通过"
+ 
+ 
+ #查看 svn status 查看更改内容[git 与 svn 仓库代码差别]
+ #比对提交代码至 svn
+ 
+  
+ # SVN 还原代码命令
+ ## 递归还原所有文件
+ svn revert --depth infinity .
+ ## 撤销单个文件
+ svn revert xxx
+  
+ # 之前 SVN 仓库设置的忽略配置规则，导致有些文件没有正确同步提交到 SVN；
+ # SVN 需要重新配置一些路径或文件的忽略规则
+ 
+ # SVN 忽略配置命令
+ ## 查看指定目录所有文件的属性详情
+ $ svn proplist -R -v 10-common
+ “.” 上的属性:
+   svn:ignore
+     .git
+ 
+   svn:mergeinfo
+     /branches/20230602_MSP_V2R1B2/msp_vob:26810-26813,26849-26850,26867,26895
+     /branches/20231204_MSP_V2R1B3/msp_vob:26808,26816-26817,27000,27099,27117,27191,27274,27362,28008
+     /trunk/mspv1/msp_vob:28006
+ “10-common/doc/Git分支管理/AoneFlow_feature.jpg” 上的属性:
+   svn:mime-type
+     application/octet-stream
+ “10-common/doc/Git分支管理/AoneFlow_master.jpg” 上的属性:
+   svn:mime-type
+     application/octet-stream
+ “10-common/doc/Git分支管理/AoneFlow_release.jpg” 上的属性:
+   svn:mime-type
+     application/octet-stream
+ ....
+ .... 
+ 
+ $ svn proplist -R -v 30-client/mspweb/msplanguage/
+ “30-client/mspweb/msplanguage” 上的属性:
+   svn:ignore
+     .idea
+     build
+     node_modules
+ 
+ “30-client/mspweb/msplanguage/app/assets/avatar.png” 上的属性:
+   svn:mime-type
+     application/octet-stream
+ “30-client/mspweb/msplanguage/app/assets/layout/leftbg1.png” 上的属性:
+   svn:mime-type
+     application/octet-stream
+ ....
+ ....
+ 
+ 
+ # 查看指定目录下那些文件或子目录被忽略
+ $ svn propget svn:ignore .
+ .git
+ 
+ $ svn propget svn:ignore 10-common/
+ svn:  警告: W200017: Property 'svn:ignore' not found on '10-common'
+ svn: E200000: 发生问题；请参阅其它错误信息
+ 
+ $ svn propget svn:ignore 30-client/mspweb/msplanguage/
+ .idea
+ build
+ node_modules
+ 
+ 
+ # 递归查看指定目录下那些文件或子目录被忽略
+ $ svn propget svn:ignore . -R
+ . - .git
+ 
+ 30-client/mspweb/msp - .idea
+ build
+ node_modules
+ 
+ 30-client/mspweb/msp-ws-lan - .idea
+ build
+ node_modules
+ 
+ 30-client/mspweb/mspbackstage - .idea
+ build
+ node_modules
+ 
+ 30-client/mspweb/msphttp - .idea
+ build
+ node_modules
+ 
+ 30-client/mspweb/msplanguage - .idea
+ build
+ node_modules
+ 
+ 30-client/mspweb/mspmanage - .idea
+ build
+ node_modules
+ 
+ 40-servers/genkey/prj_linux - genkey
+ 
+ 40-servers/mpuaps - document
+ 
+ 40-servers/msplib - demo
+ 
+ 60-ec/web - .git
+ dist
+ node_modules
+ package-lock.json
+ 
+ 60-ec/web/dist - *
+  
+ 
+ # 停止忽略某个目录（如果这个目录或文件未被跟踪会报错，因为这个属性是设置在被忽略文件的父目录上的）
+ # 以 30-client/mspweb/msplanguage/node_modules 为例
+ $ svn propdel svn:ignore 30-client/mspweb/msplanguage/node_modules
+ “30-client/mspweb/msplanguage/node_modules” 尚未纳入版本控制
+ svn: E155010: 找不到节点 '/home/project/mpu_v2r1b5/30-client/mspweb/msplanguage/node_modules'。
+ 
+ $ cd 30-client/mspweb/msplanguage/
+ $ ls
+ app  config  docs  env.js  LICENSE  node_modules  package.json  package-lock.json  README.md  scripts
+ 
+ $ svn propdel svn:ignore node_modules
+ “node_modules” 尚未纳入版本控制
+ svn: E155010: 找不到节点 '/home/project/mpu_v2r1b5/30-client/mspweb/msplanguage/node_modules'。
+ 
+ $ svn propdel svn:ignore node_module .
+ “node_module” 尚未纳入版本控制
+ svn: E155010: 找不到节点 '/home/project/mpu_v2r1b5/30-client/mspweb/msplanguage/node_module'。
+ 
+ 
+ # 只能通过更新 msplanguage 的属性重新设置规则
+ $ cd 30-client/mspweb/msplanguage/
+ $ svn propget svn:ignore .
+ idea
+ build
+ node_modules
+ # 同时设置忽略多个文件，必须用换行符隔开
+ $ svn propset svn:ignore '.idea
+ build' .
+ 
+ ```
 
 **SVN 同步提交流程：**
-
+以下流程已集成到自动同步脚本中，每天定时执行脚本同步提交代码至SVN。
 ```shell
 ## 切换到对应 Git 分支
 $ git checkout master
@@ -1795,7 +1754,7 @@ $ svn status
 ?       svn_sync_git_commit.bat
 
 ## 添加所有修改
-
+...
 
 ## 提交到 SVN
 $ svn ci -m "IN 其它 [release/V2R1B4_1.0]代码同步
@@ -1804,7 +1763,6 @@ $ svn ci -m "IN 其它 [release/V2R1B4_1.0]代码同步
 平台/产品/模块: ALL
 自测结果: 自测通过"
 ```
-
 
 
 ## 测试对接人
