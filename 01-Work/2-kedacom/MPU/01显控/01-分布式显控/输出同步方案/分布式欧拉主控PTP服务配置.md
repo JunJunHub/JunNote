@@ -131,6 +131,24 @@ PTP同步算法的核心是通过**精确测量路径延迟**和**动态调整�
 
 ## 分布式欧拉主控PTP服务配置
 
+### 分布式主控硬件信息
+@刘辉 
+处理器型号：飞腾腾锐D2000
+网卡型号：网讯WX1860A4(支持PTP)
+晶振型号：INTERQUIP(应达利) 5YAA25000203TF30Q3 精度 ±30 ppm
+系统版本：@俞露
+```shell
+[root@localhost mpuaps]# uname -a
+Linux localhost.localdomain 5.10.0-60.18.0.50.oe2203.aarch64 #1 SMP Wed Mar 30 02:43:08 UTC 2022 aarch64 aarch64 aarch64 GNU/Linux
+[root@localhost mpuaps]# cat /etc/os-release
+NAME="openEuler"
+VERSION="22.03 LTS"
+ID="openEuler"
+VERSION_ID="22.03"
+PRETTY_NAME="openEuler 22.03 LTS"
+ANSI_COLOR="0;31"
+```
+
 ### ethtool 网卡硬件信息确认
 ```shell
 # 查看网卡对PTP的支持
@@ -268,6 +286,60 @@ parm:           RxBufferMode:0=(default)no header split
 [   16.246052] ngbe 0000:04:00.1 enp4s0f1: NIC Link is Up 1 Gbps, Flow Control: RX/TX
 [root@localhost ~]#
 ```
+
+### yum 仓库源配置
+
+**主控节点安装 linuxptp 不需要配置，默认就是这个仓库源；**
+流媒体服务器安装 linuxptp 需要先配置下 yum 仓库源；
+```shell
+# 配置使用公司内部私有仓库源，并修改 /etc/yum.conf 禁用 gpgcheck
+# 安装完成后，恢复流媒体服务器默认配置，避免引入一些未知问题
+[root@node-2t97 yum.repos.d]# cat /etc/yum.conf
+[main]
+gpgcheck=0  # 这个设置为0，安装linuxptp之后改为默认值 1
+installonly_limit=3
+clean_requirements_on_remove=True
+best=True
+skip_if_unavailable=False
+
+[root@node-2t97 yum.repos.d]#
+[root@node-2t97 yum.repos.d]#
+# 配置仓库源信息
+# 在 /ect/yum.repos.d/ 目录添加 openEuler.repo 内如如下
+# 安装完成后，将 openEuler.repo 文件重命名为 openEuler.repo.bak
+[root@node-2t97 yum.repos.d]# cat /etc/yum.repos.d/openEuler.repo
+[OS]
+name=OS
+baseurl=http://10.68.11.150/openeuler/22.03lts/aarch64/OS/
+enabled=1
+
+[everything]
+name=everything
+baseurl=http://10.68.11.150/openeuler/22.03lts/aarch64/everything/
+enabled=1
+
+[EPOL]
+name=EPOL
+baseurl=http://10.68.11.150/openeuler/22.03lts/aarch64/EPOL/
+enabled=1
+
+[debuginfo]
+name=debuginfo
+baseurl=http://10.68.11.150/openeuler/22.03lts/aarch64/debuginfo/
+enabled=1
+
+[source]
+name=source
+baseurl=http://10.68.11.150/openeuler/22.03lts/aarch64/source/
+enabled=1
+
+[update]
+name=update
+baseurl=http://10.68.11.150/openeuler/22.03lts/aarch64/update/
+enabled=1
+[root@node-2t97 yum.repos.d]#
+```
+
 
 ### ptp4l 服务安装
 ```shell
