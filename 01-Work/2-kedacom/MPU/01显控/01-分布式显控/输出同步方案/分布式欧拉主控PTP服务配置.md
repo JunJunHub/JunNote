@@ -481,8 +481,8 @@ tcpdump -i eth1 -vvv -nn -w dec_capture.pcap
 此服务主要用于实现将**网卡硬件时间**同步到**系统时间**
 ```shell
 # 同步网卡PHC与系统时钟
-#phc2sys -s enp4s0f1 -c CLOCK_REALTIME -O 0 -m --step_threshold=1 -w
-phc2sys -s enp4s0f1 -c CLOCK_REALTIME -O 0 -w
+#phc2sys -c enp4s0f1 -s CLOCK_REALTIME -O 0 -m --step_threshold=1 -w
+phc2sys -c enp4s0f1 -s CLOCK_REALTIME -O 0 -w
 
 # 在 /etc/sysconfig/phc2sys 添加服务启动参数，将网卡时钟同步到系统时钟
 # 注意: 此参数会传给 phc 服务启动参数，启动服务前需要先配置此参数
@@ -932,7 +932,7 @@ Fri Mar 28 01:53:53 UTC 2025
 # PTP 是通过组播来实现多设备之间的时钟同步，PTP 的标准多播地址是224.0.1.129端口319和320
 # 持续抓包并过滤 PTP 报文，确保存在完整的 Sync → Follow_Up → Delay_Req → Delay_Resp 交互流程
 sudo tcpdump -i enp4s0f1 -vvv -nn 'port 319 or port 320'
-tcpdump -i eth0 -vvv -nn 'port 319 or port 320'
+tcpdump -i eth1 -vvv -nn 'port 319 or port 320'
 
 ## 主控抓包：抓包保存到文件，并限制抓取 20 个数据包自动停止
 sudo tcpdump -i enp4s0f1 -vvv -nn -c 20 -w ptp_capture.pcap 'port 319 or port 320'
@@ -945,6 +945,44 @@ tcpdump -i eth1 -vvv -nn -w dec_capture.pcap
 ```
 #### 主控查看PTP服务状态
 ```shell
+################################
+# journalctl 查看服务启动运行日志 #
+################################
+#查看完整日志
+journalctl -u ptp4l 
+
+#翻页查看完整日志
+journalctl -u ptp4l | less
+
+# 查看最近100条日志
+journalctl -u ptp4l -n 100
+
+# 查看包含"timeout"关键词的日志
+journalctl -u ptp4l -g "timeout"
+
+# 查看状态变化的日志（结合优先级过滤）
+journalctl -u ptp4l -p info..warning -g "state changed"
+
+#跟踪最新日志打印
+journalctl -u ptp4l -f
+
+# 查看今天日志
+journalctl -u ptp4l --since today
+
+# 查看最近2小时日志
+journalctl -u ptp4l --since "2 hours ago"
+
+# 查看特定时间段
+journalctl -u ptp4l --since "2025-07-24 09:00:00" --until "2025-07-24 10:00:00"
+
+# 导出全部日志
+journalctl -u ptp4l > ptp4l_full.log
+
+# 导出特定时间段日志
+journalctl -u ptp4l --since "2025-07-23" --until "2025-07-24" > ptp4l_0723-0724.log
+
+
+
 # 确认服务正常启动
 [root@localhost etc]# systemctl status phc2sys.service ptp4l.service
 ● phc2sys.service - PTP: Synchronize two clocks
