@@ -387,6 +387,7 @@ Complete!
 # 手动启动 ptp4l 并启用调试模式
 # 局域网内没有其它优先级更高的PTP设备，选举自己为主时钟
 # -H 启用硬件时间戳，正常启动会输出如下信息
+sudo ptp4l -f /etc/ptp4l.conf -i bond0 -H -m -l 6
 [root@localhost mpuaps]# sudo ptp4l -f /etc/ptp4l.conf -i enp4s0f1 -H -m -l 6 
 ptp4l[12125.285]: selected /dev/ptp3 as PTP clock
 ptp4l[12125.286]: port 1: INITIALIZING to LISTENING on INIT_COMPLETE
@@ -1023,8 +1024,42 @@ journalctl -u ptp4l --since "2025-07-23" --until "2025-07-24" > ptp4l_0723-0724.
 ```shell
 ## 在控制服务器上用 pmc 工具查看主从同步状态
 ### 查看与从设备同步状态
+###  -u：使用 UDP 传输协议（默认端口 319）
+​###  -b 6​：指定 PTP 域编号（Domain Number），默认为 0
+​###  -f <配置文件>​：加载 ptp4l 的配置文件（如 ptp4l.conf），确保配置一致性
+​###  GET <管理TLV>​：指定查询的 PTP 管理 TLV（Type-Length-Value）类型
+###      PORT_DATA_SET      端口状态(角色、同步状态)
+###      CURRENT_DATA_SET   主从时钟同步状态(偏移量、路径延时)
+###      DEFAULT_DATA_SET   本地时钟信息(时钟等级、精度)
+###      PARENT_DATA_SET    父时钟信息(主时钟ID、优先级)
+
+[root@localhost mpuaps]# sudo pmc -u -b 6 -f /etc/ptp4l.conf "GET PORT_DATA_SET"
+sending: GET PORT_DATA_SET
+        020304.fffe.050617-1 seq 0 RESPONSE MANAGEMENT PORT_DATA_SET
+                portIdentity            020304.fffe.050617-1
+                portState               MASTER
+                logMinDelayReqInterval  0
+                peerMeanPathDelay       0
+                logAnnounceInterval     1
+                announceReceiptTimeout  3
+                logSyncInterval         0
+                delayMechanism          1
+                logMinPdelayReqInterval 0
+                versionNumber           2
+        001611.fffe.ccde95-1 seq 0 RESPONSE MANAGEMENT PORT_DATA_SET
+                portIdentity            001611.fffe.ccde95-1
+                portState               SLAVE
+                logMinDelayReqInterval  0
+                peerMeanPathDelay       0
+                logAnnounceInterval     1
+                announceReceiptTimeout  3
+                logSyncInterval         0
+                delayMechanism          1
+                logMinPdelayReqInterval 0
+                versionNumber           2
+
 ## 同步正常的示例
-[root@localhost mpuaps]# sudo pmc -i enp4s0f1 "GET CURRENT_DATA_SET"
+[root@localhost mpuaps]# sudo pmc -u -b 6 -f /etc/ptp4l.conf "GET CURRENT_DATA_SET"
 sending: GET CURRENT_DATA_SET
         00141a.fffe.3db436-1 seq 0 RESPONSE MANAGEMENT CURRENT_DATA_SET   从设备标识符: 00141a.fffe.3db436 去除 fffe 就是 mac 地址
                 stepsRemoved     1                                        表示当前设备距离主时钟的跳数:
