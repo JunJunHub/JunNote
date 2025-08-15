@@ -387,7 +387,8 @@ Complete!
 # 手动启动 ptp4l 并启用调试模式
 # 局域网内没有其它优先级更高的PTP设备，选举自己为主时钟
 # -H 启用硬件时间戳，正常启动会输出如下信息
-sudo ptp4l -f /etc/ptp4l.conf -i bond0 -H -m -l 6
+# -m 日志输出到标准输出stdout
+# -l 设置日志等级
 [root@localhost mpuaps]# sudo ptp4l -f /etc/ptp4l.conf -i enp4s0f1 -H -m -l 6 
 ptp4l[12125.285]: selected /dev/ptp3 as PTP clock
 ptp4l[12125.286]: port 1: INITIALIZING to LISTENING on INIT_COMPLETE
@@ -482,8 +483,8 @@ tcpdump -i eth1 -vvv -nn -w dec_capture.pcap
 此服务主要用于实现将**网卡硬件时间**同步到**系统时间**
 ```shell
 # 同步网卡PHC与系统时钟
-#phc2sys -c enp4s0f1 -s CLOCK_REALTIME -O 0 -m --step_threshold=1 -w
-phc2sys -c enp4s0f1 -s CLOCK_REALTIME -O 0 -w
+#phc2sys -s enp4s0f1 -c CLOCK_REALTIME -O 0 -m --step_threshold=1 -w
+phc2sys -s enp4s0f1 -c CLOCK_REALTIME -O 0 -w
 
 # 在 /etc/sysconfig/phc2sys 添加服务启动参数，将网卡时钟同步到系统时钟
 # 注意: 此参数会传给 phc 服务启动参数，启动服务前需要先配置此参数
@@ -494,13 +495,12 @@ phc2sys -c enp4s0f1 -s CLOCK_REALTIME -O 0 -w
 #   --step_threshold=1 偏移>1秒时触发时钟跳变（而非平滑调整;默认就是1）
 #   -w 等待ptp4l先完成PHC同步
 # 默认配置: OPTIONS="-a -r"
-OPTIONS="-c enp4s0f1 -s CLOCK_REALTIME -O 0 -w"
+OPTIONS="-s enp4s0f1 -c CLOCK_REALTIME -O 0 -w"
 
 
 # 启动 phc2sys 服务
 systemctl start phc2sys
 systemctl enable phc2sys
-
 ```
 
 
@@ -549,6 +549,13 @@ systemctl enable phc2sys
    - `fault_reset_interval 4`
      FAULTY 状态恢复间隔为 4 秒，用于链路异常后的自动恢复。
 
+```shell
+[global]
+ignore_delay_resp 1  #忽略非期望的延迟响应
+ignore_sync 0        #忽略非期望的同步消息
+```
+
+
 ------
 
 #### 运行时选项（Runtime Options）
@@ -565,7 +572,7 @@ systemctl enable phc2sys
    - `time_stamping     hardware`
      启用 ​**硬件时间戳**​（需网卡支持，否则改为 `software`）
    - `tx_timestamp_timeout 1`
-     发送时间戳等待超时为 1 秒，防止硬件响应延迟导致阻塞。
+     发送时间戳等待超时为 1 毫秒，防止硬件响应延迟导致阻塞。
 
 ------
 
@@ -702,8 +709,8 @@ twoStepFlag             1       # 主从需一致（通常主时钟启用）
 
 - **时间戳模式与滤波**
   ```shell
-  time_stamping           hardware  # 从时钟必须启用硬件时间戳（若支持）
-  tsproc_mode             raw       # 禁用滤波（主时钟无需配置）
+  time_stamping           hardware        # 从时钟必须启用硬件时间戳（若支持）
+  tsproc_mode             raw             # 禁用滤波（主时钟无需配置）
   delay_filter            moving_average  # 从时钟需优化滤波算法
   ```
 
@@ -738,6 +745,206 @@ twoStepFlag             1       # 主从需一致（通常主时钟启用）
 - **一致性要求**：仅 `domainNumber`、`network_transport`、`delay_mechanism`、`twoStepFlag` 需主从严格一致。
 
 若从时钟配置不当（如伺服增益过低或滤波窗口过长），即使主时钟参数正确，同步速度仍会受限。因此，**主从时钟的参数需根据角色差异化配置**，而非完全一致。
+
+
+## 交换机PTP优化配置
+
+### PTP网络拓扑
+```
+graph LR
+    A[PTP Grandmaster] -->|主端口| HUAWEI_SWITCH
+    HUAWEI_SWITCH -->|PTP VLAN| B[PTP设备1]
+    HUAWEI_SWITCH -->|PTP VLAN| C[PTP设备N]
+    HUAWEI_SWITCH -->|普通VLAN| D[TP-Link路由器]
+    style D stroke:#f66,stroke-width:2px
+```
+### 发现问题
+PTP同步**编解码设备**同一连接到**交换机A**，使用网线把**交换机A**接到连接了公司网络的另一台**交换机B**时，编解码设备PTP同步报错。抓包发现**路由器**设备以非常高的频率向报错的编解码设备重复转发PTP组播包，异常的设备无法正常发送PTP组播包。时间一段运行，会导致组播风暴，很多设备都会出现相同的报错。**路由器也连接到交换机B**。此时断开交换机A和交换机B的网络连接，编解码设备PTP同步恢复正常。  --  非必现问题
+![[dec_ptp_err_1.png]]
+
+![[dec_ptp_err_2.png]]
+
+
+#### 优化ptp4l参数配置（待验证）
+
+待验证...
+```shell
+[global]
+# 增强重复消息抵抗
+ignore_delay_resp 1
+ignore_sync 0
+announceReceiptTimeout 5     # 原0
+syncReceiptTimeout 2         # 原0
+tx_timestamp_timeout 100     # 单位毫秒 (原10秒)
+
+[eth1]
+# 强制端到端延迟机制
+delay_mechanism E2E
+# 启用时间戳过滤
+hwts_filter 1
+```
+启用边界时钟保护
+待验证...
+```shell
+# 启动ptp4l时添加防护参数
+/usr/ptp4l -f /usr/ptp4l.conf -i eth1 -H -m \
+  --filter_frames 1 --check_fup_sync 1 --step_threshold 1.0
+```
+
+### 优化交换机PTP配置（待验证）​​
+
+- 精确控制PTP组播流路径
+- 隔离非PTP设备（如TP-Link路由器）
+- 保证PTP消息优先级和转发效率
+#### 华为交换机
+
+##### 交换机配置备份回滚
+```shell
+# 备份配置
+save ptp-configuration.cfg
+
+# 回滚命令
+<huawei> reset saved-configuration ptp-configuration.cfg
+<huawei> reboot
+```
+##### 全局基础配置
+```shell
+system-view
+
+# 启用PTP协议栈
+ptp enable  
+ptp profile 1588v2
+ptp domain 0
+
+# 设置BC角色（边界时钟）
+clock source ptp synchronization enable
+clock source ptp priority 1
+
+# 启用硬件时间戳
+ptp hardware-enable
+
+# 配置时间优先级（确保主时钟选举）
+ptp local-clock-priority 128
+```
+##### PTP端口角色分配
+假设交换机端口布局：
+- G1/0/1：连接PTP Grandmaster(主时钟)
+- G1/0/2-10：连接PTP从时钟设备
+- G1/0/24：连接TP-Link路由器（）
+```shell
+# 主时钟端口（最高优先级）
+interface GigabitEthernet 1/0/1
+ ptp enable
+ ptp port-type bc        # 边界时钟端口
+ ptp delay-mechanism e2e # 端到端延时机制
+ trust dscp 46           # 最高QoS优先级
+ storm-control multicast pps 100  # 限速组播
+# 保证带宽和低延时
+ qos queue 7 gts cir 100 cbs 2000  // 保留7号队列给PTP
+
+# 从时钟设备端口
+interface range GigabitEthernet 1/0/2 to 1/0/10
+ ptp enable
+ ptp port-type bc
+ traffic-filter vlan ptp-isolate in  // PTP隔离策略
+
+# 连接TP-Link路由器的端口（隔离配置）
+interface GigabitEthernet 1/0/24
+ no ptp enable                        // 禁用PTP处理
+ storm-control broadcast pps 50      // 严格广播抑制
+ storm-control multicast pps 20      // PTP组播抑制
+ l2 protocol tunnel user-defined packet 88F7 deny // 过滤PTP以太类型(0x88F7)
+```
+
+##### 配置PTP VLAN隔离
+```shell
+# 创建专用PTP VLAN
+vlan 200
+ description PTP_Isolation_VLAN
+ ptp enable
+
+# 所有PTP端口加入VLAN
+interface range GigabitEthernet 1/0/1 to 1/0/10
+ port link-type access
+ port default vlan 200
+
+# 路由器端口排除在PTP VLAN外
+interface GigabitEthernet 1/0/24
+ port link-type access
+ port default vlan 100  // 普通业务VLAN
+```
+
+##### 配置组播控制（解决重复转发）
+```shell
+# 创建静态组播组
+multicast-vpn
+ ip route-distinguisher 100:1
+ ptp-group 224.0.1.129  // Sync消息组播地址
+
+# 绑定组播路径
+interface GigabitEthernet 1/0/1
+ igmp-snooping static-group 224.0.1.129
+
+# 组播快速离开（防泛滥）
+igmp-snooping fast-leave vlan 200
+```
+
+##### QoS策略保证
+```shell
+traffic classifier PTP 
+ if-match protocol ptp
+
+traffic behavior PTP
+ remark dscp 46   // 最高优先级
+ bandwidth pct 5   // 保障5%带宽
+
+traffic policy PTP_POLICY
+ classifier PTP behavior PTP
+
+# 应用到所有端口
+interface range GigabitEthernet 1/0/1 to 1/0/24
+traffic-policy PTP_POLICY inbound
+```
+
+##### 验证命令
+```shell
+# 检查PTP状态
+display ptp all
+display ptp interface brief
+
+# 检查组播流
+display igmp-snooping group vlan 200
+
+# 查看QoS效果
+display traffic-policy applied-record
+
+# 实时监控
+terminal monitor
+terminal trapping
+debugging ptp packet all
+```
+
+
+#### TP-Link 交换机
+```shell
+# TP-Link 命令行示例（需在交换机执行）
+configure terminal
+protocol ptp
+  mode boundary-clock      # 声明为边界时钟
+  network-transport l2     # 强制L2传输
+  no multicast-forwarding  # 关键：禁用组播泛洪
+  ptp-forwarding enable    # 启用专用PTP转发
+  log announce-interval 1
+  sync-receipt-timeout 3
+  exit
+interface range gigabitEthernet 1/0/1-24
+  no ptp enable            # 在非PTP端口禁用
+  exit
+interface gigabitEthernet 1/0/1  # PTP端口
+  ptp enable
+  ptp delay-mechanism e2e
+  exit
+```
 
 ## 主控服务器时区配置
 
@@ -836,7 +1043,7 @@ UTC
 
 `tcpdump -i eth1 -vvv -nn -c 20 -w ptp_capture.pcap 'port 319 or port 320'`
 
-![image-20250328102048544](./res/ptp_capture.png)
+![image-20250328102048544](ptp_capture_demo.png)
 
 
 #### 2、确认设备 PTP 服务正常启动
@@ -1145,7 +1352,7 @@ rx_filter 12
 [root@localhost msp]#
 
 
-# 测试设置硬件时间戳能力
+# 测试设置硬件时间戳能力(启动ptp4l服务时会自动设置)
 #  -t 1   启用发送时间戳
 #  -r 12  设置接收过滤为PTPv2事件（这是硬件支持的模式）
 hwstamp_ctl -i enp4s0f1 -t 1 -r 12
