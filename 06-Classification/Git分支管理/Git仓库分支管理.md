@@ -917,7 +917,7 @@ git reset --hard HEAD~1
 git push origin master --force
 #或者使用更安全的 --force-with-lease 选项：
 git push origin master --force-with-lease
-```
+ ```
 
 ### Git 忽略文件
 
@@ -1299,7 +1299,30 @@ Get-ChildItem -Path 40-servers/mpuaps/ -Recurse -File | Where-Object { $_.Length
 
 ```
 
-##### Git 推送到远程仓库测试
+##### Git 推送到远程仓库测试(大文件|大数据量 提交)
+
+单文件大于 200M，单次推送总大小超过 2G
+
+```shell
+# 安装 lfs
+$ git lfs install
+Updated Git hooks.
+Git LFS initialized.
+
+# lfs 处理指定文件(会添加到 .gitattributes, 手动编辑 .gitattributes 也可)
+git lfs track 40-servers/mpuaps/library/mcusdk/lib/ubuntu_amd64/release/libkdvmedianet.so
+
+# 查看都迁移了那些文件
+git lfs ls-files
+
+# 项目提交普通文件一样 git add & git push 即可
+```
+
+
+
+
+
+
 
 ```shell
 # 因为是直接基于 SNV 初始化的本地 Git 仓库，包含之前 SVN 的所有历史记录。直接推送数据量大，无法推送成功
