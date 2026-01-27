@@ -9,6 +9,8 @@
 /.vscode/
 /.vscode
 
+# Trae
+/.trae/
 
 # 暂不同步的目录暂不同步的目录
 .obsidian
