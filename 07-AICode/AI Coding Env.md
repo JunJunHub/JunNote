@@ -352,8 +352,8 @@ Skills 是可复用的能力模块，提供专门的领域知识和功能。
 
 **安装**
 ```shell
-# 使用 npm 安装
-npm install -g @anthropic-ai/claude-code
+# 使用 Windows PowerShell 安装（注意先解决VPN网络问题）
+irm https://claude.ai/install.ps1 | iex
 ```
 
 **配置**
