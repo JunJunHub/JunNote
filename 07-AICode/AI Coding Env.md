@@ -350,6 +350,7 @@ Skills 是可复用的能力模块，提供专门的领域知识和功能。
 
 ### Claude Code CLI
 
+
 **安装**
 ```shell
 # 使用 Windows PowerShell 安装（注意先解决VPN网络问题）
@@ -358,21 +359,34 @@ irm https://claude.ai/install.ps1 | iex
 
 **配置**
 
-编辑配置文件 `~/.claude/setting.json`，支持使用智谱 AI GLM 模型：
+配置使用国内 GLM 大模型 [Claude Code - 智谱AI开放文档](https://docs.bigmodel.cn/cn/coding-plan/tool/claude)
 
 ```json
+# 编辑或新增 `settings.json` 文件
+# MacOS & Linux 为 `~/.claude/settings.json`
+# Windows 为`用户目录/.claude/settings.json`
+# 新增或修改里面的 env 字段
+# 注意替换里面的 `your_zhipu_api_key` 为您上一步获取到的 API Key
 {
   "env": {
-    "ANTHROPIC_AUTH_TOKEN": "your-api-token",
+    "ANTHROPIC_AUTH_TOKEN": "your_zhipu_api_key",
     "ANTHROPIC_BASE_URL": "https://open.bigmodel.cn/api/anthropic",
     "API_TIMEOUT_MS": "3000000",
-    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": 1,
-    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "glm-4.7",
-    "ANTHROPIC_DEFAULT_SONNET_MODEL": "glm-4.7",
-    "ANTHROPIC_DEFAULT_OPUS_MODEL": "glm-4.7"
+    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": 1
   }
 }
+# 再编辑或新增 `.claude.json` 文件
+# MacOS & Linux 为 `~/.claude.json`
+# Windows 为`用户目录/.claude.json`
+# 新增 `hasCompletedOnboarding` 参数
+{
+  "hasCompletedOnboarding": true
+}
 ```
+
+运行 claude 检查大模型配置结果
+
+[[image.png]]
 
 **常用命令**
 ```shell
