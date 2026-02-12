@@ -1,0 +1,20 @@
+{
+  "id": "conv-1770870820080-oo0wax13p",
+  "title": "Refine Chinese note structure",
+  "titleGenerationStatus": "success",
+  "createdAt": 1770870820081,
+  "updatedAt": 1770871063605,
+  "lastResponseAt": 1770871063605,
+  "sessionId": "06e24ed4-da19-4e32-85f2-7144989c607f",
+  "sdkSessionId": "06e24ed4-da19-4e32-85f2-7144989c607f",
+  "currentNote": "07-AICode/AI Coding Env.md",
+  "usage": {
+    "model": "haiku",
+    "inputTokens": 0,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 0,
+    "contextWindow": 200000,
+    "contextTokens": 0,
+    "percentage": 0
+  }
+}
