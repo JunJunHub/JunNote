@@ -1,0 +1,33 @@
+filters:
+  and:
+    - file.folder.startsWith("01-Work")
+    - file.ext.containsAny("md", "doc", "pdf", "xmind", "canvas")
+formulas:
+  未命名: ""
+properties:
+  file.backlinks:
+    displayName: 反向连接
+views:
+  - type: table
+    name: 表格
+    order:
+      - file.name
+      - file.path
+      - file.tags
+      - file.mtime
+    sort:
+      - property: file.mtime
+        direction: DESC
+      - property: file.path
+        direction: ASC
+      - property: file.backlinks
+        direction: DESC
+      - property: file.ctime
+        direction: DESC
+    columnSize:
+      file.name: 300
+      file.path: 685
+      file.tags: 114
+      file.mtime: 301
+  - type: cards
+    name: 视图
