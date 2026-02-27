@@ -350,6 +350,7 @@ Skills 是可复用的能力模块，提供专门的领域知识和功能。
 
 ### Claude Code CLI
 
+[快速入门 - Claude Code Docs](https://code.claude.com/docs/zh-CN/quickstart)
 
 **安装**
 ```shell
@@ -372,9 +373,14 @@ irm https://claude.ai/install.ps1 | iex
     "ANTHROPIC_AUTH_TOKEN": "your_zhipu_api_key",
     "ANTHROPIC_BASE_URL": "https://open.bigmodel.cn/api/anthropic",
     "API_TIMEOUT_MS": "3000000",
-    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": 1
+    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": 1,
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "glm-5",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": "glm-5",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL": "glm-5"
   }
 }
+
+
 # 再编辑或新增 `.claude.json` 文件
 # MacOS & Linux 为 `~/.claude.json`
 # Windows 为`用户目录/.claude.json`
