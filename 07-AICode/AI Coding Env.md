@@ -370,7 +370,7 @@ irm https://claude.ai/install.ps1 | iex
 # 注意替换里面的 `your_zhipu_api_key` 为您上一步获取到的 API Key
 {
   "env": {
-    "ANTHROPIC_AUTH_TOKEN": "your_zhipu_api_key",
+    "ANTHROPIC_AUTH_TOKEN": "366c26d548094461911ff3616cca9299.fuBVSnKlqU5nJhSU",
     "ANTHROPIC_BASE_URL": "https://open.bigmodel.cn/api/anthropic",
     "API_TIMEOUT_MS": "3000000",
     "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": 1,
