@@ -1,0 +1,6 @@
+filters:
+  and:
+    - file.path.startsWith("02-CodeComponents")
+views:
+  - type: table
+    name: 表格

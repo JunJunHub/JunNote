@@ -1,0 +1,6 @@
+filters:
+  and:
+    - file.path.startsWith("03-Tools")
+views:
+  - type: table
+    name: 表格
