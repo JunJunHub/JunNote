@@ -4,7 +4,7 @@ aliases:
 tags:
   - QT
 ---
-实践总结文档 [[QT嵌入式移植]]
+实践总结文档 [[QT 嵌入式移植]]
 # 编译PC 端
 
 1. sudo apt update 

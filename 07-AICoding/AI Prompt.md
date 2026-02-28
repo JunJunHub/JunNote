@@ -35,7 +35,6 @@
 
 
 
-
 将整理的开发规范，自动添加至本项目 .lingma/rules
 [项目专属规则配置与使用-智能编码助手通义灵码-阿里云 (aliyun.com)](https://help.aliyun.com/zh/lingma/user-guide/rules?spm=a2c4g.11186623.0.preDoc.4683e95aT6QBQX)
 
