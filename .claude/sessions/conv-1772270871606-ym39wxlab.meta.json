@@ -1,0 +1,20 @@
+{
+  "id": "conv-1772270871606-ym39wxlab",
+  "title": "整理面试知识点与简历内容",
+  "titleGenerationStatus": "success",
+  "createdAt": 1772270871613,
+  "updatedAt": 1772271105086,
+  "lastResponseAt": 1772271105086,
+  "sessionId": "75431a03-753b-4d35-a988-f122654d5474",
+  "sdkSessionId": "75431a03-753b-4d35-a988-f122654d5474",
+  "currentNote": "04-ReviewKnowledge/附件简历-李永军-音视频业务系统开发.pdf",
+  "usage": {
+    "model": "opus",
+    "inputTokens": 0,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 0,
+    "contextWindow": 200000,
+    "contextTokens": 0,
+    "percentage": 0
+  }
+}
