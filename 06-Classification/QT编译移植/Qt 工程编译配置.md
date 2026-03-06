@@ -19,3 +19,8 @@ cmake -B build `
 | `CMAKE_INSTALL_PREFIX` | 安装输出目录 |
 | `QT_DIR` | Qt 根目录 |
 | `CMAKE_PREFIX_PATH` | Qt 模块查找路径 |
+
+
+
+MaintenanceTool 安装更新 QT 组件指定国内源
+./MaintenanceTool.exe --mirror https://mirrors.ustc.edu.cn/qtproject

@@ -1,0 +1,20 @@
+{
+  "id": "conv-1772437670364-zp6qivjy7",
+  "title": "Career planning for robotics and AI in Suzhou",
+  "titleGenerationStatus": "success",
+  "createdAt": 1772437670365,
+  "updatedAt": 1772440879310,
+  "lastResponseAt": 1772440879310,
+  "sessionId": "005caf38-470b-4e1a-bfed-0f508e62eebe",
+  "sdkSessionId": "005caf38-470b-4e1a-bfed-0f508e62eebe",
+  "currentNote": "04-ReviewKnowledge/木及规划.md",
+  "usage": {
+    "model": "opus",
+    "inputTokens": 0,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 0,
+    "contextWindow": 200000,
+    "contextTokens": 0,
+    "percentage": 0
+  }
+}

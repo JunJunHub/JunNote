@@ -117,6 +117,14 @@ pyenv local 3.11.7
 
 # 卸载版本
 pyenv uninstall 3.11.7
+
+# 安装之后需要设置PATH环境变量
+C:\Users\Tiger\.pyenv\pyenv-win\bin
+C:\Users\Tiger\.pyenv\pyenv-win\shims
+
+# 然后执行 python 确认是否正常工作
+python --version
+
 ```
 
 #### Scoop (统一包管理器)
@@ -394,9 +402,13 @@ irm https://claude.ai/install.ps1 | iex
 
 运行 claude 检查大模型配置结果
 
-[[image.png]]
+![[image.png]]
 
-**常用命令**
+
+使用 ccr 配置灵活切换不同的大模型 [claude-code-router/README_zh.md](https://github.com/musistudio/claude-code-router/blob/main/README_zh.md)
+
+
+**Claude 常用命令**
 ```shell
 # 启动交互式会话
 claude
@@ -411,6 +423,10 @@ claude "帮我重构这个函数"
 **获取 API Token**
 - 智谱 AI 开放平台: https://open.bigmodel.cn/
 - Claude 官网: https://console.anthropic.com/
+
+
+
+
 
 ### Aider CLI
 
