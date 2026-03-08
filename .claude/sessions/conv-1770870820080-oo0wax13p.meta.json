@@ -3,11 +3,10 @@
   "title": "Refine Chinese note structure",
   "titleGenerationStatus": "success",
   "createdAt": 1770870820081,
-  "updatedAt": 1770871063605,
+  "updatedAt": 1772974525499,
   "lastResponseAt": 1770871063605,
   "sessionId": "06e24ed4-da19-4e32-85f2-7144989c607f",
   "sdkSessionId": "06e24ed4-da19-4e32-85f2-7144989c607f",
-  "currentNote": "07-AICode/AI Coding Env.md",
   "usage": {
     "model": "haiku",
     "inputTokens": 0,

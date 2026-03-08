@@ -1,0 +1,20 @@
+{
+  "id": "conv-1772974585649-n1alfusvh",
+  "title": "整理面试题到笔记系统",
+  "titleGenerationStatus": "success",
+  "createdAt": 1772974585649,
+  "updatedAt": 1772975105679,
+  "lastResponseAt": 1772975105679,
+  "sessionId": "9e9c1986-d2eb-4248-bdd4-1446cc8c0bc0",
+  "sdkSessionId": "9e9c1986-d2eb-4248-bdd4-1446cc8c0bc0",
+  "currentNote": "04-ReviewKnowledge/木及问题整理.md",
+  "usage": {
+    "model": "opus",
+    "inputTokens": 0,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 0,
+    "contextWindow": 200000,
+    "contextTokens": 0,
+    "percentage": 0
+  }
+}
