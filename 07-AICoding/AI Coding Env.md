@@ -362,6 +362,13 @@ Skills 是可复用的能力模块，提供专门的领域知识和功能。
 
 [快速入门 - Claude Code Docs](https://code.claude.com/docs/zh-CN/quickstart)
 
+[Claude Code 高效配置指南-CC-Switch 一键切换硅基流动API](https://blog.csdn.net/m0_55334999/article/details/157619519)
+
+[CC-Switch：你的AI编码助手“万能遥控器”](https://blog.csdn.net/sensen111111/article/details/158575473)
+
+[Apifox CLI + Claude Skills：将接口自动化测试融入研发工作流](https://apifox.com/blog/apifox-cli-and-claude-skills/)
+
+
 **安装**
 ```shell
 # 使用 Windows PowerShell 安装（注意先解决VPN网络问题）
