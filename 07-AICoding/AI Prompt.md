@@ -34,6 +34,11 @@
 7、如何配置运行此项目
 
 
+要求 AI 统一使用 Mermaid 绘制项目架构图、流程图、类图、时序图、状态机；语法兼容版本 8.8.0
+现在最新版本是 Mermaid 11.13.0 但是一些查看 Markdown 文档的插件和工具中依旧是按旧版本语法解析，可能有兼容问题。
+
+备选 PlantUML 框架图和流程图、时序图。
+
 
 将整理的开发规范，自动添加至本项目 .lingma/rules
 [项目专属规则配置与使用-智能编码助手通义灵码-阿里云 (aliyun.com)](https://help.aliyun.com/zh/lingma/user-guide/rules?spm=a2c4g.11186623.0.preDoc.4683e95aT6QBQX)

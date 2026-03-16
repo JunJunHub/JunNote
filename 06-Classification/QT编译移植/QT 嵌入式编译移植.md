@@ -11,7 +11,8 @@ tags:
 ---
 B站教程文档链接 [[QT 源码编译移植]]
 
-**前言：**
+# **前言**
+
 > 本次实践是使用 VMware 安装 Ubuntu22.04 虚拟机作为交叉编译宿主机
 > 目标机器为基于 RK3588 芯片的嵌入式 Linux 系统（基于 BusyBox 制作的 Linux 极简系统）
 >
@@ -19,7 +20,66 @@ B站教程文档链接 [[QT 源码编译移植]]
 > 1、编译 Qt 依赖的组件比较多，虚拟机空间预留 100G
 > 2、编译过程中需要下载很多源码包，确保良好的网络环境
 
-# 准备工作
+**提示：** 
+ **QT 编译环境已部署至 10.67.69.23 编译机，后续维护可基于此环境编译，下文仅供参考**
+`/home/junjun/RK3588_SDK/buildroot`
+
+**10.67.69.23 编译机环境，基于 RK3588 的配套工具链，完整的编译配置参见：`/home/junjun/RK3588_SDK/buildroot/rk3588_with_qt5_mali.config`
+
+**10.67.69.23 编译机环境 QPA 插件编译：**
+`/home/junjun/QPA/eglfs_1/build_eglfs.sh`
+```shell
+root@ubuntu-Vostro-3268:/home/junjun/QPA/eglfs_1# cat build_eglfs.sh
+#Qt5.15 交叉编译结束后，再替换修改的 eglfs 插件源码，重新编译插件
+#此插件基于 Qt5.15 源码修改而来。
+#若要支持其它版本Qt，参考修改内容，在对应Qt版本的源码上重新修改。
+
+QT_SRC_DIR=/home/junjun/RK3588_SDK/buildroot/output/build/qt5base-e44097b63d17ba3178a637df7fac51ddc51cb48b
+
+######################
+#Qt5.15源码替换编译
+######################
+
+#这两个生成 .a 文件，整个工程重新编译一下
+cp eglfs/eglfs/plugin/qeglplatformcontext.cpp ${QT_SRC_DIR}/src/platformsupport/eglconvenience/
+cp eglfs/eglfs/plugin/qkmsdevice.cpp ${QT_SRC_DIR}/src/platformsupport/kmsconvenience/
+
+
+#进入到源码路径重新执行下 make && make install
+cd ${QT_SRC_DIR}
+make && make install
+cd -
+
+echo ""
+echo ""
+echo ""
+echo ""
+
+
+#生成 .so 插件
+cp eglfs/eglfs/plugin/eglfs_kms/* ${QT_SRC_DIR}/src/plugins/platforms/eglfs/deviceintegration/eglfs_kms/
+cd ${QT_SRC_DIR}/src/plugins/platforms/eglfs/deviceintegration/eglfs_kms/
+ls -lth
+make && make install
+cd -
+
+echo ""
+echo ""
+echo ""
+echo ""
+
+
+#生成 .so 插件
+cp eglfs/eglfs/plugin/eglfs_kms_support/* ${QT_SRC_DIR}/src/plugins/platforms/eglfs/deviceintegration/eglfs_kms_support/
+cd ${QT_SRC_DIR}/src/plugins/platforms/eglfs/deviceintegration/eglfs_kms_support/
+ls -lth
+make && make install
+cd -
+
+```
+
+
+# 一、准备工作
 
 ## 资源清单
 
@@ -30,11 +90,11 @@ B站教程文档链接 [[QT 源码编译移植]]
 - QT6.8.1 在线安装程序（Qt5.15之后不提供完整的离线安装包，只能在线安装）  
     需要先登录 Qt 账户选择需要安装的工具 [qt_online_installers](https://download.qt.io/official_releases/online_installers/)
 - buildroot-2024.02.9.tar.gz [Buildroot Download](https://buildroot.org/download.html)
-- RockChipSDK -- 公司用RK的芯片厂家提供支持(包含一个厂家定制的buildroot)
+- RockChipSDK -- 公司用RK的芯片，由厂家提供支持(包含一个厂家定制的buildroot)
 
 ## 知识扫盲
 
-标签：busybox、buildroot、poky、kernel、mesa、libmali、mali gpu、OpenGL、OpenGL ES、OpenCL、Vulkan API、DirectFB、ffmpeg、qt、qpa、eglfs、drm、framebuffer、wayland、qtwebengine、qt-webengine-ffmpeg、eudev、medv
+**标签：** busybox、buildroot、poky、kernel、mesa、libmali、mali gpu、OpenGL、OpenGL ES、OpenCL、Vulkan API、DirectFB、ffmpeg、qt、qpa、eglfs、drm、framebuffer、wayland、qtwebengine、qt-webengine-ffmpeg、eudev、medv
 
 > 复制关键词问 ChatGPT 了解相关知识
 
@@ -65,7 +125,7 @@ B站教程文档链接 [[QT 源码编译移植]]
 
 [mesa opengl 加载显示驱动流程](https://blog.csdn.net/czg13548930186/article/details/131204470#:~:text=%E6%96%87%E7%AB%A0%E8%AF%A6%E7%BB%86%E4%BB%8B%E7%BB%8D%E4%BA%86Linux%E7%8E%AF%E5%A2%83%E4%B8%AD%EF%BC%8CMesa%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E5%92%8C%E5%8A%A0%E8%BD%BD%E9%80%82%E5%90%88%E7%9A%84OpenGL%E9%A9%B1%E5%8A%A8%EF%BC%8C%E5%8C%85%E6%8B%AC%E7%A1%AC%E4%BB%B6%E9%A9%B1%E5%8A%A8%E5%92%8C%E8%BD%AF%E4%BB%B6%E9%A9%B1%E5%8A%A8%E5%A6%82swrast%E3%80%82%20Mesa%E9%80%9A%E8%BF%87libGL.so%E8%87%AA%E5%8A%A8%E9%80%89%E6%8B%A9%E9%80%82%E9%85%8DGPU%E7%9A%84%E9%A9%B1%E5%8A%A8%EF%BC%8C%E5%B9%B6%E5%8F%AF%E9%80%9A%E8%BF%87%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%BC%BA%E5%88%B6%E4%BD%BF%E7%94%A8%E8%BD%AF%E4%BB%B6%E9%A9%B1%E5%8A%A8%E3%80%82,GLX%E4%BD%9C%E4%B8%BAXWindowSystem%E5%92%8COpenGL%E7%9A%84%E6%8E%A5%E5%8F%A3%EF%BC%8C%E6%8F%90%E4%BE%9B%E9%97%B4%E6%8E%A5%E5%92%8C%E7%9B%B4%E6%8E%A5%E7%8A%B6%E6%80%81%E3%80%82%20%E6%AD%A4%E5%A4%96%EF%BC%8Cglxinfo%E5%B7%A5%E5%85%B7%E7%94%A8%E4%BA%8E%E6%9F%A5%E8%AF%A2%E9%A9%B1%E5%8A%A8%E8%AF%A6%E6%83%85%E5%92%8COpenGL%E7%89%B9%E6%80%A7%E3%80%82)
 
-# 编译步骤
+# 二、编译步骤
 
 ## 1、虚拟机环境配置
 
@@ -96,18 +156,16 @@ B站教程文档链接 [[QT 源码编译移植]]
 
 ### 2.2 宿主机安装 QT6.8
 
-使用 Qt 在线安装程序安装，
-
+**使用 Qt 在线安装程序安装 QT6.8 之后，修复如下问题：**
 > 虚拟机启动 QtCreate 报错，需要安装 mesa 驱动
-> 
 > sudo apt-get install libgl1-mesa-dev
 
-安装 QT 打包工具
 
-git clone https://github.com/probonopd/linuxdeployqt.git  
-cd linuxdeployqt  
-cmake .  
-make
+**安装 QT 打包工具：**
+> git clone https://github.com/probonopd/linuxdeployqt.git  
+> cd linuxdeployqt  
+> cmake .  
+> make
 
 ### 2.2 构建 sysroot
 
@@ -141,7 +199,6 @@ make menuconfig
 - 软件配置
     
 - 文件系统
-    
 
 #### 2.2.2 问题记录
 
@@ -170,7 +227,6 @@ make[2]: *** 正在等待未完成的任务....
 ```
 
 ##### 2、Qt 模块编译报错
-
 ```shell
 #编译
 ```
@@ -199,15 +255,19 @@ make WGET_OPTS="--no-check-certificate"
 
 #### 2.3.3 问题记录
 
-## 3、嵌入式 Linux 环境 Qt 程序运行测试
+
+
+## 3、Qt 程序运行调试(嵌入式 Linux 环境 )
 
 > 交叉编译调试工具：gdb、ldd、strace
-> 
-> strace 跟踪程序：
-> 
-> strace -e open,openat,dlopen,dlsym ./your_qt_application
+> strace 跟踪程序调用：strace -e open,openat,dlopen,dlsym ./your_qt_application
 
-# QT 开发
+
+
+
+
+
+# 三、QT技术调研
 
 [Qt Quick 和 Widgets 的对比 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/656231132)
 
@@ -265,7 +325,8 @@ https://www.bilibili.com/video/BV1hk2mYkE7w/?spm_id_from=333.1391.0.0&vd_source=
 GitHub 开源项目  
 https://github.com/nuoqian-lgtm/QianWindow
 
-# 参考
+
+# 参考文档
 
 ## 博客
 
