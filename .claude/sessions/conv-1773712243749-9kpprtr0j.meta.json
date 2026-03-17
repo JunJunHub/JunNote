@@ -1,0 +1,122 @@
+{
+  "id": "conv-1773712243749-9kpprtr0j",
+  "title": "帮我整理最新的国内AI大模型服务提供商，从套餐类型、支持的大模型种类等多个未对横向对比",
+  "titleGenerationStatus": "failed",
+  "createdAt": 1773712243770,
+  "updatedAt": 1773726690452,
+  "lastResponseAt": 1773726690452,
+  "sessionId": "a3e93682-a08b-4fc3-9f09-cc0efe952ae1",
+  "sdkSessionId": "a3e93682-a08b-4fc3-9f09-cc0efe952ae1",
+  "currentNote": "07-AICoding/AI Model Server.md",
+  "usage": {
+    "model": "opus",
+    "inputTokens": 0,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 0,
+    "contextWindow": 200000,
+    "contextTokens": 0,
+    "percentage": 0
+  },
+  "subagentData": {
+    "call_97ffa19232024e0680279e7e": {
+      "id": "call_97ffa19232024e0680279e7e",
+      "description": "收集阿里百炼模型列表",
+      "prompt": "访问阿里云百炼平台 https://bailian.aliyun.com 和 https://help.aliyun.com/zh/model-studio/developer-reference/model-list 获取完整的支持模型列表。\n\n重点关注：\n1. 支持的所有大模型名称和系列\n2. 各种模型的上下文长度\n3. 常规套餐类型\n4. 是否有Coding Plan套餐\n\n请整理成结构化的信息。",
+      "mode": "async",
+      "isExpanded": false,
+      "status": "running",
+      "toolCalls": [],
+      "asyncStatus": "running",
+      "agentId": "a190e4b",
+      "startedAt": 1773726390542,
+      "outputToolId": "call_2692686919ad465a9fef2cec"
+    },
+    "call_35c675f449cc48e58bb43a05": {
+      "id": "call_35c675f449cc48e58bb43a05",
+      "description": "收集百度千帆模型列表",
+      "prompt": "访问百度千帆大模型平台 https://cloud.baidu.com/product/wenxinworkshop.html 和文档页面获取完整的支持模型列表。\n\n重点关注：\n1. 百度自研模型（ERNIE系列）\n2. 支持的第三方模型\n3. 各种模型的上下文长度\n4. 常规套餐类型\n5. 是否有Coding Plan套餐\n\n请整理成结构化的信息。",
+      "mode": "async",
+      "isExpanded": false,
+      "status": "running",
+      "toolCalls": [],
+      "asyncStatus": "running",
+      "agentId": "abd0d19",
+      "startedAt": 1773726390562,
+      "outputToolId": "call_844578a2aaff488693527f19"
+    },
+    "call_9a5eec8305b64da083d2e8d4": {
+      "id": "call_9a5eec8305b64da083d2e8d4",
+      "description": "收集腾讯云混元模型列表",
+      "prompt": "访问腾讯云混元大模型平台 https://cloud.tencent.com/product/hunyuan 和文档页面获取完整的支持模型列表。\n\n重点关注：\n1. 混元系列所有模型名称\n2. 各种模型的上下文长度和特点\n3. 常规套餐类型\n4. 是否有Coding Plan套餐\n\n请整理成结构化的信息。",
+      "mode": "async",
+      "isExpanded": false,
+      "status": "running",
+      "toolCalls": [],
+      "asyncStatus": "running",
+      "agentId": "a9dcb16",
+      "startedAt": 1773726390563,
+      "outputToolId": "call_d567e80a520b4be79c06b0c6"
+    },
+    "call_a15d30caa8944968ace99b0d": {
+      "id": "call_a15d30caa8944968ace99b0d",
+      "description": "收集字节火山引擎模型列表",
+      "prompt": "访问字节跳动火山引擎方舟平台 https://www.volcengine.com/product/ark 和文档页面获取完整的支持模型列表。\n\n重点关注：\n1. 豆包系列所有模型\n2. 支持的第三方模型（千问、DeepSeek等）\n3. 各种模型的上下文长度\n4. Coding Plan套餐详情\n5. 常规套餐类型\n\n请整理成结构化的信息。",
+      "mode": "async",
+      "isExpanded": false,
+      "status": "running",
+      "toolCalls": [],
+      "asyncStatus": "running",
+      "agentId": "a642e27",
+      "startedAt": 1773726390565,
+      "outputToolId": "call_902344450f734e76ac20c5ef"
+    },
+    "call_cab2510bd0984954b05d7608": {
+      "id": "call_cab2510bd0984954b05d7608",
+      "description": "收集硅基流动模型列表",
+      "prompt": "访问硅基流动SiliconFlow平台 https://siliconflow.cn 和价格页面 https://siliconflow.cn/zh-cn/price.html 获取完整的支持模型列表。\n\n重点关注：\n1. 支持的所有模型名称（DeepSeek、Qwen、GLM等）\n2. 各种模型的上下文长度和价格\n3. 常规套餐类型\n4. 是否有Coding Plan套餐\n5. 私有化部署选项\n\n请整理成结构化的信息。",
+      "mode": "async",
+      "isExpanded": false,
+      "status": "running",
+      "toolCalls": [],
+      "asyncStatus": "running",
+      "agentId": "ad77280",
+      "startedAt": 1773726405007
+    },
+    "call_18e69d0e7ce2435f913a7b34": {
+      "id": "call_18e69d0e7ce2435f913a7b34",
+      "description": "收集智谱AI模型列表",
+      "prompt": "访问智谱AI开放平台 https://open.bigmodel.cn 和文档页面获取完整的支持模型列表。\n\n重点关注：\n1. GLM系列所有模型名称（GLM-4-Plus、GLM-4-9B等）\n2. 各种模型的上下文长度和特点\n3. 免费模型和付费模型区分\n4. 常规套餐类型\n5. Claude Code兼容配置\n6. 是否有Coding Plan套餐\n\n请整理成结构化的信息。",
+      "mode": "async",
+      "isExpanded": false,
+      "status": "running",
+      "toolCalls": [],
+      "asyncStatus": "running",
+      "agentId": "a0b7d12",
+      "startedAt": 1773726405021
+    },
+    "call_9569e52a104d4fcdb40615ff": {
+      "id": "call_9569e52a104d4fcdb40615ff",
+      "description": "收集Kimi开放平台模型列表",
+      "prompt": "访问Kimi开放平台（月之暗面）https://platform.moonshot.cn 和文档页面获取完整的支持模型列表。\n\n重点关注：\n1. Moonshot系列所有模型名称\n2. 各种模型的上下文长度（8k/32k/128k）\n3. 常规套餐类型\n4. 是否有Coding Plan套餐\n\n请整理成结构化的信息。",
+      "mode": "async",
+      "isExpanded": false,
+      "status": "running",
+      "toolCalls": [],
+      "asyncStatus": "running",
+      "agentId": "abcc706",
+      "startedAt": 1773726405024
+    },
+    "call_0fee3297fceb489a8121ef04": {
+      "id": "call_0fee3297fceb489a8121ef04",
+      "description": "收集MiniMax模型列表",
+      "prompt": "访问MiniMax开放平台 https://www.minimaxi.com 和文档页面获取完整的支持模型列表。\n\n重点关注：\n1. abab系列模型（abab6.5、abab5.5等）\n2. 语音模型speech-01\n3. 视频模型video-01\n4. 各种模型的上下文长度和特点\n5. 常规套餐类型\n6. 是否有Coding Plan套餐\n\n请整理成结构化的信息。",
+      "mode": "async",
+      "isExpanded": false,
+      "status": "running",
+      "toolCalls": [],
+      "asyncStatus": "running",
+      "agentId": "a0f032e",
+      "startedAt": 1773726405027
+    }
+  }
+}
